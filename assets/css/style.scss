@@ -18,6 +18,12 @@ $success:      #31a24c;
 $warning:      #f7b928;
 $critical:     #e41e3f;
 
+// Spacing tokens from DESIGN-meta
+$base:    16px;
+$xl:      24px;
+$xxl:     32px;
+$section: 64px;
+
 // Typography fallbacks for Optimistic VF
 $font-stack: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", Montserrat, Helvetica, Arial, sans-serif;
 
@@ -117,8 +123,3 @@ footer {
   }
 }
 
-// Layout spacing tokens from DESIGN-meta
-$base:  16px;
-$xl:    24px;
-$xxl:   32px;
-$section: 64px;
