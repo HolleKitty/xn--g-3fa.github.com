@@ -1,0 +1,124 @@
+---
+---
+
+// DESIGN-meta colors
+$canvas:       #ffffff;
+$surface-soft: #f1f4f7;
+$ink-deep:     #0a1317;
+$ink:          #1c1e21;
+$charcoal:     #444950;
+$slate:        #4b4c4f;
+$steel:        #5d6c7b;
+$stone:        #8595a4;
+$hairline:     #ced0d4;
+$hairline-soft:#dee3e9;
+$primary:      #0064e0;
+$primary-deep: #0457cb;
+$success:      #31a24c;
+$warning:      #f7b928;
+$critical:     #e41e3f;
+
+// Typography fallbacks for Optimistic VF
+$font-stack: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", Montserrat, Helvetica, Arial, sans-serif;
+
+// Override jekyll-theme-minimal
+body {
+  font-family: $font-stack;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.50;
+  letter-spacing: -0.16px;
+  color: $ink;
+  background: $canvas;
+}
+
+.wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+header, footer {
+  text-align: center;
+}
+
+header {
+  padding: $section 0 $xxl;
+  border: none;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.21;
+    letter-spacing: 0;
+    color: $ink-deep;
+    margin-bottom: $base;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    color: $steel;
+    margin: 0;  // hide theme's default p margin
+  }
+}
+
+section {
+  text-align: center;
+  padding: 0 0 $xxl;
+
+  p {
+    font-size: 16px;
+    color: $stone;
+  }
+}
+
+footer {
+  padding: $xl 0 0;
+  font-size: 12px;
+  color: $stone;
+
+  a {
+    color: $steel;
+    text-decoration: none;
+    &:hover { color: $charcoal; }
+  }
+}
+
+// Hide theme default footer
+.site-footer {
+  display: none;
+}
+
+// Divider
+.divider {
+  width: 32px;
+  height: 1px;
+  background: $hairline;
+  margin: 0 auto $xxl;
+}
+
+// Button (pill-shaped)
+.btn {
+  display: inline-block;
+  background: $ink-deep;
+  color: $canvas;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: -0.14px;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 100px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:active, &:focus {
+    background: $charcoal;
+  }
+}
+
+// Layout spacing tokens from DESIGN-meta
+$base:  16px;
+$xl:    24px;
+$xxl:   32px;
+$section: 64px;
