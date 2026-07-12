@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网站建设中</title>
+    <title>{{ site.title }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, sans-serif;
+            background: #0f0f1a;
             color: #a0a4b8;
             display: flex;
             flex-direction: column;
@@ -47,11 +47,12 @@
         .footer {
             position: fixed;
             bottom: 2rem;
-        }
-
-        .footer, .footer a {
             font-size: 0.78rem;
             color: #505468;
+        }
+
+        .footer a {
+            color: #606478;
             text-decoration: none;
         }
 
@@ -59,16 +60,16 @@
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>网站建设中</h1>
+        <h1>{{ site.title }}</h1>
         <div class="divider"></div>
-        <div class="message">敬请期待。</div>
+        <div class="message">{{ site.description }}</div>
     </div>
 
     <div class="footer">
-        <span>&copy; 2025</span>
+        {% if site.footer_text != "" %}
+        <a href="{{ site.footer_link }}" target="_blank" rel="noopener">{{ site.footer_text }}</a>
+        {% endif %}
     </div>
-
 </body>
 </html>
