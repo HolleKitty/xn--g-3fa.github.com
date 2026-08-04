@@ -7,10 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════
-   Design Tokens — taste-editorial + taste-default
-   Type scale: 1.333 Perfetto Fourth — 12/18/24/32/42/56
-   Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64
-   Font weights: 400, 500, 700 (3 max)
+   Design Tokens
    ═══════════════════════════════════════════════════════════════ */
 :root {
   --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -22,6 +19,8 @@
   --color-ink-secondary: #606770;
   --color-ink-tertiary: #8A8D91;
   --color-hairline-soft: rgba(0,0,0,0.06);
+  --color-tech-bg: #FFFFFF;
+  --color-tech-bg-alt: #F3F2EF;
 
   --color-accent: #C9A96E;
   --color-accent-soft: rgba(201,169,110,0.12);
@@ -35,46 +34,42 @@
 
   --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  /* Type scale — 1.333 */
-  --text-caption: 12px;
-  --text-label: 14px;
-  --text-body: 18px;
-  --text-h3: 24px;
-  --text-h2: 32px;
-  --text-h1: 42px;
-  --text-display: 56px;
+  /* Type scale */
+  --text-caption: 12px; --text-label: 14px; --text-body: 18px;
+  --text-h3: 24px; --text-h2: 32px; --text-h1: 42px; --text-display: 56px;
   --text-colossal: clamp(120px, 18vw, 200px);
 
-  /* Spacing scale */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 12px;
-  --space-lg: 16px;
-  --space-xl: 24px;
-  --space-2xl: 32px;
-  --space-3xl: 48px;
-  --space-4xl: 64px;
-  --space-5xl: 96px;
-  --space-6xl: 128px;
+  /* Spacing */
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 16px;
+  --space-xl: 24px; --space-2xl: 32px; --space-3xl: 48px;
+  --space-4xl: 64px; --space-5xl: 96px; --space-6xl: 128px;
 
-  /* Vertical rhythm */
-  --body-leading: 1.8;
-  --heading-leading: 1.2;
-  --display-leading: 1.05;
+  --body-leading: 1.8; --heading-leading: 1.2; --display-leading: 1.05;
+}
+
+/* ─── Dark Mode ─── */
+body.dark {
+  --color-canvas: #1A1C1E;
+  --color-canvas-warm: #222528;
+  --color-ink-primary: #E8E9EB;
+  --color-ink-secondary: #A8ABB2;
+  --color-ink-tertiary: #6B6E76;
+  --color-hairline-soft: rgba(255,255,255,0.08);
+  --color-tech-bg: #25282C;
+  --color-tech-bg-alt: #2A2D32;
+  --color-accent-soft: rgba(201,169,110,0.15);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.2), 0 4px 8px rgba(0,0,0,0.3);
+  --shadow-card-hover: 0 12px 32px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; text-rendering: optimizeLegibility; }
 body {
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  font-weight: 400;
-  line-height: var(--body-leading);
-  background: var(--color-canvas);
-  color: var(--color-ink-primary);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  line-height: var(--body-leading); background: var(--color-canvas);
+  color: var(--color-ink-primary); overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 ::-webkit-scrollbar { width: var(--space-sm); }
@@ -85,37 +80,30 @@ body {
    HERO
    ═══════════════════════════════════════════════════════════════ */
 .hero-stage {
-  position: relative;
-  width: 100%; height: 100vh;
+  position: relative; width: 100%; height: 100vh;
   background: radial-gradient(115% 88% at 50% 8%, #121008, #070604 48%, #020201);
   overflow: hidden;
 }
 .hero-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 .hero-content {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; z-index: 2;
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; z-index: 2;
   padding: 0 var(--space-xl);
 }
 .hero-eyebrow {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
   letter-spacing: 0.3em; text-transform: uppercase;
-  color: rgba(232,217,160,0.45);
-  margin-bottom: var(--space-lg);
+  color: rgba(232,217,160,0.45); margin-bottom: var(--space-lg);
   opacity: 0; animation: fadeUp 1.2s ease 0.4s forwards;
 }
 .hero-title {
   font-family: var(--font-serif); font-size: var(--text-display); font-weight: 700;
   line-height: var(--display-leading); color: #F8F6F0; letter-spacing: 0.05em;
-  margin-bottom: var(--space-xl);
-  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  margin-bottom: var(--space-xl); text-shadow: 0 4px 24px rgba(0,0,0,0.3);
   opacity: 0; animation: fadeUp 1.2s ease 0.6s forwards;
 }
-.hero-title em {
-  font-style: normal; color: #E8D5A3; font-weight: 800;
-}
+.hero-title em { font-style: normal; color: #E8D5A3; font-weight: 800; }
 .hero-desc {
   font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
   color: rgba(200,190,170,0.65); max-width: 600px; line-height: var(--body-leading);
@@ -124,8 +112,7 @@ body {
 }
 .hero-cta {
   display: inline-flex; align-items: center; gap: var(--space-sm);
-  padding: var(--space-lg) var(--space-2xl);
-  border-radius: var(--radius-pill);
+  padding: var(--space-lg) var(--space-2xl); border-radius: var(--radius-pill);
   background: var(--color-canvas); color: var(--color-ink-primary);
   font-family: var(--font-sans); font-size: var(--text-body); font-weight: 500;
   text-decoration: none; letter-spacing: 0.02em;
@@ -170,7 +157,7 @@ body {
   z-index: 1000; transition: var(--transition-smooth);
 }
 .nav-pill {
-  display: flex; align-items: center; gap: var(--space-sm);
+  display: flex; align-items: center; gap: var(--space-xs);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-pill);
   background: rgba(255,255,255,0.85);
@@ -189,36 +176,49 @@ body {
 .nav-pill.on-dark .nav-link { color: rgba(255,255,255,0.55); }
 .nav-pill.on-dark .nav-link:hover { color: #E8D5A3; background: rgba(255,255,255,0.06); }
 .nav-pill.on-dark .nav-link.active { color: #E8D5A3; background: rgba(255,255,255,0.08); }
+.nav-pill.on-dark .nav-btn { color: rgba(255,255,255,0.45); }
+.nav-pill.on-dark .nav-btn:hover { color: #E8D5A3; background: rgba(255,255,255,0.06); }
 
 .nav-logo {
   display: flex; align-items: center;
-  text-decoration: none; padding: 2px var(--space-sm); margin-right: var(--space-sm);
+  text-decoration: none; padding: 2px var(--space-sm); margin-right: var(--space-xs);
   transition: opacity 0.3s ease;
 }
 .nav-logo-img { height: 26px; width: auto; display: block; }
+
 .nav-link {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
   color: var(--color-ink-secondary); text-decoration: none;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-pill);
   transition: var(--transition-smooth); cursor: pointer; border: none; background: none;
   letter-spacing: 0.02em;
 }
 .nav-link:hover { background: var(--color-accent-soft); color: var(--color-ink-primary); }
 .nav-link.active { background: var(--color-ink-primary); color: var(--color-canvas); }
 
-/* ═══════════════════════════════════════════════════════════════
-   CONTENT WRAPPER
-   ═══════════════════════════════════════════════════════════════ */
-.content-wrap { position: relative; z-index: 2; background: var(--color-canvas); }
+.nav-sep {
+  width: 1px; height: 18px; background: var(--color-hairline-soft);
+  margin: 0 var(--space-xs);
+}
+.nav-pill.on-dark .nav-sep { background: rgba(255,255,255,0.1); }
+
+.nav-btn {
+  font-family: var(--font-sans); font-size: 13px; font-weight: 500;
+  color: var(--color-ink-tertiary); cursor: pointer; border: none; background: none;
+  padding: var(--space-sm) var(--space-sm); border-radius: 50%;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  transition: var(--transition-smooth); line-height: 1;
+}
+.nav-btn:hover { background: var(--color-accent-soft); color: var(--color-ink-primary); }
 
 /* ═══════════════════════════════════════════════════════════════
-   PROLOGUE — section header
+   CONTENT
    ═══════════════════════════════════════════════════════════════ */
+.content-wrap { position: relative; z-index: 2; background: var(--color-canvas); transition: background 0.5s ease; }
+
 .prologue {
   max-width: 800px; margin: 0 auto;
-  padding: var(--space-6xl) var(--space-xl) var(--space-4xl);
-  text-align: center;
+  padding: var(--space-6xl) var(--space-xl) var(--space-4xl); text-align: center;
 }
 .prologue-eyebrow {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
@@ -235,49 +235,32 @@ body {
   color: var(--color-ink-secondary); max-width: 560px; margin: 0 auto;
   line-height: var(--body-leading);
 }
-/* ornamental divider */
 .prologue::after {
-  content: '';
-  display: block; width: 48px; height: 1px;
-  background: var(--color-accent); opacity: 0.4;
-  margin: var(--space-3xl) auto 0;
+  content: ''; display: block; width: 48px; height: 1px;
+  background: var(--color-accent); opacity: 0.4; margin: var(--space-3xl) auto 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CHAPTER — full-width narrative block
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── Chapter ─── */
 .chapter {
-  display: grid;
-  grid-template-columns: 1fr 680px 1fr;
-  padding: var(--space-6xl) var(--space-xl);
-  position: relative;
-  overflow: hidden;
+  display: grid; grid-template-columns: 1fr 680px 1fr;
+  padding: var(--space-6xl) var(--space-xl); position: relative; overflow: hidden;
+  transition: background 0.5s ease;
 }
 .chapter:nth-child(even) { background: var(--color-canvas-warm); }
 
-/* Chapter number — colossal ornamental numeral */
 .chapter-numeral {
-  grid-column: 1;
-  grid-row: 1 / 3;
+  grid-column: 1; grid-row: 1 / 3;
   font-family: var(--font-serif); font-size: var(--text-colossal); font-weight: 700;
-  color: var(--color-accent); opacity: 0.08;
-  line-height: 0.75;
-  align-self: start; justify-self: end;
-  margin-right: var(--space-3xl);
-  margin-top: -0.12em;
+  color: var(--color-accent); opacity: 0.06;
+  line-height: 0.75; align-self: start; justify-self: end;
+  margin-right: var(--space-3xl); margin-top: -0.12em;
   pointer-events: none; user-select: none;
 }
-/* Even chapters: numeral on right */
 .chapter:nth-child(even) .chapter-numeral {
-  grid-column: 3;
-  justify-self: start;
-  margin-right: 0; margin-left: var(--space-3xl);
+  grid-column: 3; justify-self: start; margin-right: 0; margin-left: var(--space-3xl);
 }
 
-.chapter-body {
-  grid-column: 2;
-  position: relative; z-index: 1;
-}
+.chapter-body { grid-column: 2; position: relative; z-index: 1; }
 
 .chapter-label {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
@@ -295,7 +278,6 @@ body {
   max-width: 600px; margin-bottom: var(--space-3xl);
 }
 
-/* ─── Tech Key — visible annotation boxes ─── */
 .tech-key {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md);
   max-width: 640px;
@@ -303,14 +285,12 @@ body {
 .tech-item {
   display: flex; gap: var(--space-md); align-items: flex-start;
   padding: var(--space-lg); border-radius: var(--radius-xl);
-  background: var(--color-canvas);
-  transition: background 0.3s ease;
+  background: var(--color-tech-bg); transition: background 0.3s ease;
 }
-.chapter:nth-child(even) .tech-item { background: #F3F2EF; }
+.chapter:nth-child(even) .tech-item { background: var(--color-tech-bg-alt); }
 
 .tech-symbol {
-  flex-shrink: 0;
-  width: 32px; height: 32px; border-radius: 50%;
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
   background: var(--color-accent-soft);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-sans); font-size: var(--text-label); font-weight: 700;
@@ -320,25 +300,10 @@ body {
 .tech-text strong { color: var(--color-ink-primary); font-weight: 500; display: block; margin-bottom: 2px; }
 .tech-text span { color: var(--color-ink-tertiary); font-size: var(--text-caption); }
 
-@media (max-width: 768px) {
-  .chapter { grid-template-columns: 1fr; padding: var(--space-4xl) var(--space-xl); }
-  .chapter-numeral { display: none; }
-  .chapter-body { grid-column: 1; }
-  .tech-key { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 900px) {
-  .chapter-numeral { font-size: clamp(80px, 14vw, 140px); margin-right: var(--space-xl); }
-  .chapter:nth-child(even) .chapter-numeral { margin-left: var(--space-xl); }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   INTERLUDE — Bridge section
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── Interlude / Bridge ─── */
 .interlude-header {
   max-width: 800px; margin: 0 auto;
-  padding: var(--space-6xl) var(--space-xl) var(--space-4xl);
-  text-align: center;
+  padding: var(--space-6xl) var(--space-xl) var(--space-4xl); text-align: center;
 }
 .interlude-eyebrow {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
@@ -356,29 +321,21 @@ body {
   line-height: var(--body-leading);
 }
 .interlude-header::after {
-  content: '';
-  display: block; width: 48px; height: 1px;
-  background: var(--color-accent); opacity: 0.4;
-  margin: var(--space-3xl) auto 0;
+  content: ''; display: block; width: 48px; height: 1px;
+  background: var(--color-accent); opacity: 0.4; margin: var(--space-3xl) auto 0;
 }
 
 .bridge-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
-  max-width: 1100px; margin: 0 auto;
-  padding: 0 var(--space-xl) var(--space-6xl);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl);
+  max-width: 1100px; margin: 0 auto; padding: 0 var(--space-xl) var(--space-6xl);
 }
 .bridge-card {
-  position: relative;
-  background: var(--color-canvas-warm);
-  border-radius: var(--radius-xxl);
-  padding: var(--space-2xl);
+  position: relative; background: var(--color-canvas-warm);
+  border-radius: var(--radius-xxl); padding: var(--space-2xl);
   transition: background 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
 }
 .bridge-card:hover {
-  background: var(--color-canvas);
-  transform: translateY(-4px);
+  background: var(--color-canvas); transform: translateY(-4px);
   box-shadow: var(--shadow-card-hover);
 }
 .bridge-num {
@@ -396,65 +353,38 @@ body {
   color: var(--color-ink-secondary); line-height: var(--body-leading);
 }
 
-@media (max-width: 768px) {
-  .bridge-grid { grid-template-columns: 1fr; }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   CODA — Quote
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── Coda ─── */
 .coda {
-  text-align: center;
-  padding: var(--space-6xl) var(--space-xl);
+  text-align: center; padding: var(--space-6xl) var(--space-xl);
   background: linear-gradient(180deg, var(--color-canvas), var(--color-canvas-warm), var(--color-canvas));
-  position: relative;
+  position: relative; transition: background 0.5s ease;
 }
-
-/* ornamental ring above quote */
 .coda::before {
-  content: '';
-  display: block;
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  border: 1px solid rgba(201,169,110,0.2);
+  content: ''; display: block; width: 64px; height: 64px;
+  border-radius: 50%; border: 1px solid rgba(201,169,110,0.2);
   margin: 0 auto var(--space-3xl);
 }
-
 .coda-text {
   font-family: var(--font-serif); font-size: var(--text-h2); font-weight: 400;
-  font-style: italic; line-height: 1.7;
-  color: var(--color-ink-primary); max-width: 640px;
-  margin: 0 auto var(--space-2xl);
+  font-style: italic; line-height: 1.7; color: var(--color-ink-primary);
+  max-width: 640px; margin: 0 auto var(--space-2xl);
 }
-.coda-text em {
-  font-style: normal;
-  color: var(--color-accent);
-}
+.coda-text em { font-style: normal; color: var(--color-accent); }
 .coda-author {
   font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--color-ink-tertiary);
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-ink-tertiary);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── Footer ─── */
 .footer {
-  text-align: center;
-  padding: var(--space-3xl) var(--space-xl);
+  text-align: center; padding: var(--space-4xl) var(--space-xl);
   border-top: 1px solid var(--color-hairline-soft);
+  background: var(--color-canvas); transition: background 0.5s ease;
 }
-.footer-brand {
-  font-family: var(--font-serif); font-size: var(--text-h3); font-weight: 700;
-  color: var(--color-ink-primary); letter-spacing: 0.15em; margin-bottom: var(--space-sm);
-}
-.footer-copy {
-  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 400;
-  color: var(--color-ink-tertiary); letter-spacing: 0.05em;
-}
+.footer-logo { height: 40px; width: auto; opacity: 0.7; }
 
 /* ═══════════════════════════════════════════════════════════════
-   REVEAL ANIMATION
+   REVEAL
    ═══════════════════════════════════════════════════════════════ */
 .reveal {
   opacity: 0; transform: translateY(32px);
@@ -462,25 +392,29 @@ body {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* Stagger children within .stagger-container */
-.stagger-container .reveal { transition-delay: 0s; }
-
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
-    --text-display: 40px;
-    --text-h1: 32px;
-    --text-h2: 24px;
-    --text-h3: 20px;
-    --text-body: 16px;
-    --body-leading: 1.7;
+    --text-display: 40px; --text-h1: 32px; --text-h2: 24px;
+    --text-h3: 20px; --text-body: 16px; --body-leading: 1.7;
   }
   .prologue { padding: var(--space-5xl) var(--space-xl) var(--space-3xl); }
-  .chapter { padding: var(--space-4xl) var(--space-xl); }
+  .chapter { grid-template-columns: 1fr; padding: var(--space-4xl) var(--space-xl); }
+  .chapter-numeral { display: none; }
+  .chapter-body { grid-column: 1; }
+  .tech-key { grid-template-columns: 1fr; }
   .interlude-header { padding: var(--space-5xl) var(--space-xl) var(--space-3xl); }
-  .bridge-grid { padding-bottom: var(--space-4xl); }
+  .bridge-grid { grid-template-columns: 1fr; padding-bottom: var(--space-4xl); }
+  .nav-pill { padding: var(--space-sm) var(--space-sm); gap: 2px; }
+  .nav-link { padding: var(--space-sm) var(--space-md); font-size: 11px; }
+  .nav-btn { width: 28px; height: 28px; font-size: 11px; }
+}
+
+@media (max-width: 900px) {
+  .chapter-numeral { font-size: clamp(80px, 14vw, 140px); margin-right: var(--space-xl); }
+  .chapter:nth-child(even) .chapter-numeral { margin-left: var(--space-xl); }
 }
 </style>
 </head>
@@ -492,9 +426,12 @@ body {
 <div class="nav-wrap">
   <div class="nav-pill on-dark" id="navbar">
     <a href="#" class="nav-logo" aria-label="万象镜 · 回到顶部"><img src="assets/img/logo.png" alt="万象镜" class="nav-logo-img"></a>
-    <a href="#chapters" class="nav-link active">篇章</a>
-    <a href="#bridge" class="nav-link">断桥</a>
-    <a href="#wisdom" class="nav-link">悟道</a>
+    <a href="#chapters" class="nav-link active" data-i18n="nav.chapters">篇章</a>
+    <a href="#bridge" class="nav-link" data-i18n="nav.bridge">断桥</a>
+    <a href="#wisdom" class="nav-link" data-i18n="nav.wisdom">悟道</a>
+    <span class="nav-sep"></span>
+    <button class="nav-btn" id="btn-lang" title="English" aria-label="Switch to English">EN</button>
+    <button class="nav-btn" id="btn-theme" title="暗黑模式" aria-label="切换暗黑模式">◑</button>
   </div>
 </div>
 
@@ -504,12 +441,12 @@ body {
 <div class="hero-stage" id="hero">
   <canvas id="c"></canvas>
   <div class="hero-content">
-    <p class="hero-eyebrow">深度学习寓言</p>
-    <h1 class="hero-title">镜之国的<em>学徒</em></h1>
-    <p class="hero-desc">在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵、注意之眼为灯，踏上了一场穿越数据迷雾、探寻镜中真相的修行。这不是神话，这是每一个深度学习模型被训练出来的故事。</p>
-    <a href="#chapters" class="hero-cta">开启镜中之旅 →</a>
-    <div class="hero-scroll">
-      <span>向下滚动</span>
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">深度学习寓言</p>
+    <h1 class="hero-title"><span data-i18n="hero.title1">镜之国的</span><em data-i18n="hero.title2">学徒</em></h1>
+    <p class="hero-desc" data-i18n="hero.desc">在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵、注意之眼为灯，踏上了一场穿越数据迷雾、探寻镜中真相的修行。这不是神话，这是每一个深度学习模型被训练出来的故事。</p>
+    <a href="#chapters" class="hero-cta"><span data-i18n="hero.cta">开启镜中之旅</span> →</a>
+    <div class="hero-scroll" aria-hidden="true">
+      <span data-i18n="hero.scroll">向下滚动</span>
       <div class="hero-scroll-line"></div>
     </div>
   </div>
@@ -520,247 +457,111 @@ body {
      ═══════════════════════════════════════════════════════════════ -->
 <div class="content-wrap" id="chapters">
 <div class="prologue reveal">
-  <p class="prologue-eyebrow">六重修行</p>
-  <h2 class="prologue-title">从神谕石到注意力之眼</h2>
-  <p class="prologue-desc">阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。寓言是入口，技术是真相。六重篇章，从数据收集到模型训练，从网络结构到正则化技巧，最终抵达支撑一切的硬件熔炉——这是一条所有深度学习从业者都曾走过的路。</p>
+  <p class="prologue-eyebrow" data-i18n="prologue.eyebrow">六重修行</p>
+  <h2 class="prologue-title" data-i18n="prologue.title">从神谕石到注意力之眼</h2>
+  <p class="prologue-desc" data-i18n="prologue.desc">阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。寓言是入口，技术是真相。六重篇章，从数据收集到模型训练，从网络结构到正则化技巧，最终抵达支撑一切的硬件熔炉——这是一条所有深度学习从业者都曾走过的路。</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 1 — 神谕石与失真之雾
+     CHAPTERS
      ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">壹</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第一篇章</p>
-    <h3 class="chapter-title reveal">神谕石与失真之雾</h3>
-    <p class="chapter-story reveal">一切从<span>神谕石</span>开始。在镜之国的荒野中，散落着无数这样的石头——每一块的一面刻着模糊的图景，另一面则是对应的真相。阿提的任务看似简单：将石头举到镜前，让镜子学会从模糊映射到清晰。然而，镜子最初映出的画面与真相之间，永远隔着一层<span>失真之雾</span>。这雾时浓时淡，浓时意味着镜像与真实的差距巨大，淡时则近乎吻合。阿提很快明白了一个朴素的真理：石头必须先洗净——去除残缺的、纠正错误的、统一大小和色泽——否则镜子学到的一切都将建立在流沙之上。他开始将石头<span>分批展示</span>：每次只取一小把，64 块或 128 块，让镜子在每一批上仔细揣摩，而不至于被全部石头的浩瀚所淹没。这些机械而枯燥的工序——采集、清洗、分批——恰是整场修行中最不可逾越的根基。没有好的神谕石，就没有后来的万象镜。</p>
+<!-- 1 -->
+<div class="chapter"><div class="chapter-numeral">壹</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch1.label">第一篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch1.title">神谕石与失真之雾</h3>
+<p class="chapter-story reveal" data-i18n="ch1.story">一切从神谕石开始。在镜之国的荒野中，散落着无数这样的石头——每一块的一面刻着模糊的图景，另一面则是对应的真相。阿提的任务看似简单：将石头举到镜前，让镜子学会从模糊映射到清晰。然而，镜子最初映出的画面与真相之间，永远隔着一层失真之雾。这雾时浓时淡，浓时意味着镜像与真实的差距巨大，淡时则近乎吻合。阿提很快明白了一个朴素的真理：石头必须先洗净——去除残缺的、纠正错误的、统一大小和色泽——否则镜子学到的一切都将建立在流沙之上。他开始将石头分批展示：每次只取一小把，64 块或 128 块，让镜子在每一批上仔细揣摩，而不至于被全部石头的浩瀚所淹没。这些机械而枯燥的工序——采集、清洗、分批——恰是整场修行中最不可逾越的根基。没有好的神谕石，就没有后来的万象镜。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch1.k1name">神谕石</strong><span data-i18n="ch1.k1desc">标注数据（训练集）。每条数据包含输入（问题）和标签（答案），AI 从这些配对中学习映射规律。数据量、多样性和标注质量直接决定了模型的能力上限——再好的算法也无法弥补劣质数据的缺陷。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch1.k2name">失真之雾</strong><span data-i18n="ch1.k2desc">损失函数（Loss Function）。用数学公式量化"预测值"与"真实值"之间的差距。常见的如均方误差（MSE）用于回归、交叉熵（Cross-Entropy）用于分类。损失值越大，模型表现越差——训练的目标就是让损失不断减小。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch1.k3name">分批展示</strong><span data-i18n="ch1.k3desc">Mini-batch 训练。每次取一小批样本（通常 32/64/128 个）计算梯度并更新参数。既避免了单样本训练的震荡，又比全量数据训练更节省显存，是深度学习中最基础的训练策略之一。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch1.k4name">清洗石头</strong><span data-i18n="ch1.k4desc">数据预处理。包括缺失值填充、异常值剔除、标准化/归一化、数据增强（翻转、裁剪、加噪）等。现实中的原始数据总是脏的——清洗质量决定模型学习的天花板，"垃圾进，垃圾出"是 AI 领域的第一定律。</span></div></div>
+</div></div></div>
 
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>神谕石</strong><span>标注数据（训练集）。每条数据包含输入（问题）和标签（答案），AI 从这些配对中学习映射规律。数据量、多样性和标注质量直接决定了模型的能力上限——再好的算法也无法弥补劣质数据的缺陷。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>失真之雾</strong><span>损失函数（Loss Function）。用数学公式量化"预测值"与"真实值"之间的差距。常见的如均方误差（MSE）用于回归、交叉熵（Cross-Entropy）用于分类。损失值越大，模型表现越差——训练的目标就是让损失不断减小。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>分批展示</strong><span>Mini-batch 训练。每次取一小批样本（通常 32/64/128 个）计算梯度并更新参数。既避免了单样本训练的震荡，又比全量数据训练更节省显存，是深度学习中最基础的训练策略之一。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>清洗石头</strong><span>数据预处理。包括缺失值填充、异常值剔除、标准化/归一化、数据增强（翻转、裁剪、加噪）等。现实中的原始数据总是脏的——清洗质量决定模型学习的天花板，"垃圾进，垃圾出"是 AI 领域的第一定律。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- 2 -->
+<div class="chapter"><div class="chapter-numeral">贰</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch2.label">第二篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch2.title">微分之风与链式回溯</h3>
+<p class="chapter-story reveal" data-i18n="ch2.story">掌握了神谕石的采集与清洗之后，贤者给了阿提一个看似玄妙的指示：「别瞎碰，要感知风。」阿提闭上眼，将手掌悬在镜面上方。起初他什么也感觉不到，直到贤者让他每次只微微转动一片晶片，观察雾气的变化。渐渐地，他感受到了一股无形的力场——微分之风。这片镜面上每一个位置的每一片晶片，风都在告诉它：往这个方向转动，雾气会变淡；往那个方向转动，雾气会变浓。更神奇的是链式回溯术：镜面深处的晶片也会影响最终的雾气，但这种影响不是直接的——风从镜面最外层开始，利用链式法则，一层一层向深处倒推，让最底层的晶片也知晓自己该如何调整。逆风而行是阿提学到的第二条铁律：风指向雾气最浓的方向，而他要做的，恰恰是逆着风向迈出一步。这一步的大小——步长——至关重要：太大，他会越过最低点，在雾谷两端来回震荡；太小，修行将永无止境。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch2.k1name">微分之风</strong><span data-i18n="ch2.k1desc">梯度（Gradient）。损失函数对每个参数求偏导数，得到一个向量——梯度。它指向损失增长最快的方向。梯度的大小反映了该位置损失变化的陡峭程度，是参数更新的核心依据。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch2.k2name">链式回溯</strong><span data-i18n="ch2.k2desc">反向传播（Backpropagation）。利用链式法则从输出层向输入层逐层计算梯度。每一层的梯度 = 后一层传来的梯度 × 本层激活函数的导数 × 本层的权重。这是训练一切深度神经网络的核心算法。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch2.k3name">逆风而行</strong><span data-i18n="ch2.k3desc">梯度下降（Gradient Descent）。参数更新方向 = 负梯度方向。因为梯度指向损失上升最快的方向，所以参数要向相反方向移动才能使损失减小。这是深度学习优化的最基本思想。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch2.k4name">步长</strong><span data-i18n="ch2.k4desc">学习率（Learning Rate）。控制每次参数更新的幅度。太大容易震荡甚至发散（损失不降反升），太小则收敛极慢。实际训练中常用学习率衰减策略：前期大步快走，后期小步精调。</span></div></div>
+</div></div></div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 2 — 微分之风与链式回溯
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">贰</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第二篇章</p>
-    <h3 class="chapter-title reveal">微分之风与链式回溯</h3>
-    <p class="chapter-story reveal">掌握了神谕石的采集与清洗之后，贤者给了阿提一个看似玄妙的指示：「别瞎碰，要<span>感知风</span>。」阿提闭上眼，将手掌悬在镜面上方。起初他什么也感觉不到，直到贤者让他每次只微微转动一片晶片，观察雾气的变化。渐渐地，他感受到了一股无形的力场——<span>微分之风</span>。这片镜面上每一个位置的每一片晶片，风都在告诉它：往这个方向转动，雾气会变淡；往那个方向转动，雾气会变浓。更神奇的是<span>链式回溯术</span>：镜面深处的晶片也会影响最终的雾气，但这种影响不是直接的——风从镜面最外层开始，利用链式法则，一层一层向深处倒推，让最底层的晶片也知晓自己该如何调整。<span>逆风而行</span>是阿提学到的第二条铁律：风指向雾气最浓的方向，而他要做的，恰恰是逆着风向迈出一步。这一步的大小——<span>步长</span>——至关重要：太大，他会越过最低点，在雾谷两端来回震荡；太小，修行将永无止境。</p>
+<!-- 3 -->
+<div class="chapter"><div class="chapter-numeral">叁</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch3.label">第三篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch3.title">残影之桥与归一光环</h3>
+<p class="chapter-story reveal" data-i18n="ch3.story">阿提开始堆叠越来越多的晶片层——十层、五十层、一百层。他很快遇到了一个诡异的现象：微分之风在表层劲吹，但越往镜面深处，风声越微弱。传到第五十层时已如蚊蚋振翅，到了第一百层，几乎什么都感觉不到了。这便是修行者最畏惧的梯度消失——深处的晶片收不到任何指引，如同沉入海底的石头，再也不曾移动。阿提在贤者的指点下搭建了残影之桥：与其让信号必须一层一层艰难地穿过全部晶片，不如在每隔几层之间架起一道跳跃之桥。信号可以从桥面直接跨过，不必从头走到尾——只要学会桥两端之间的"变化量"即可。与此同时，阿提为每一层施加了归一光环：将紊乱的气流抚平到同一尺度——均值为零，方差为一——然后让晶片自行学习何时需要打破这种归一。从此，百层之镜也能稳定修行，而不再是越深越死的绝境。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch3.k1name">残影之桥</strong><span data-i18n="ch3.k1desc">残差连接（Residual Connection）。核心公式：output = F(x) + x。网络不再被迫学习完整的输出，只需学习"相对于输入的改变量"。梯度可以通过恒等映射路径直接流向浅层，从根本上缓解了梯度消失问题。ResNet 凭此获得了 2015 年 ImageNet 冠军，并开启了百层以上的深层网络时代。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch3.k2name">归一光环</strong><span data-i18n="ch3.k2desc">LayerNorm / BatchNorm。BatchNorm 对一个 mini-batch 内的同一特征维度进行标准化；LayerNorm 对单个样本的所有特征维度进行标准化。两者都使每一层的输入分布保持稳定，允许使用更大的学习率，大幅加速训练收敛。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch3.k3name">梯度消失</strong><span data-i18n="ch3.k3desc">当网络层数过深时，链式法则中反复乘以小于 1 的导数（如 sigmoid 梯度最大仅 0.25），导致浅层的梯度趋近于零。浅层参数几乎不更新——这就是梯度消失。残差连接和 ReLU 激活函数是应对它的两大武器。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch3.k4name">稳定分布</strong><span data-i18n="ch3.k4desc">归一化使激活值的分布保持稳定，避免了"内部协变量偏移"——即每一层输入分布随训练不断变化导致的训练不稳定。实践中，使用 BatchNorm 的网络通常可以将学习率提高 10 倍以上，训练时间缩短为原来的 1/5 甚至更少。</span></div></div>
+</div></div></div>
 
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>微分之风</strong><span>梯度（Gradient）。损失函数对每个参数求偏导数，得到一个向量——梯度。它指向损失增长最快的方向。梯度的大小反映了该位置损失变化的陡峭程度，是参数更新的核心依据。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>链式回溯</strong><span>反向传播（Backpropagation）。利用链式法则从输出层向输入层逐层计算梯度。每一层的梯度 = 后一层传来的梯度 × 本层激活函数的导数 × 本层的权重。这是训练一切深度神经网络的核心算法。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>逆风而行</strong><span>梯度下降（Gradient Descent）。参数更新方向 = 负梯度方向。因为梯度指向损失上升最快的方向，所以参数要向相反方向移动才能使损失减小。这是深度学习优化的最基本思想。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>步长</strong><span>学习率（Learning Rate）。控制每次参数更新的幅度。太大容易震荡甚至发散（损失不降反升），太小则收敛极慢。实际训练中常用学习率衰减策略：前期大步快走，后期小步精调。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- 4 -->
+<div class="chapter"><div class="chapter-numeral">肆</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch4.label">第四篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch4.title">注意力之眼</h3>
+<p class="chapter-story reveal" data-i18n="ch4.story">镜子能看清单个字词，却始终无法理解整句话的含义——尤其是当关键信息相隔甚远时。读到句尾的「他」，镜面早已忘记句首的「那个男人」。无论残影之桥怎么跳跃，信息传递的路径终究是有距离的。直到阿提锻造出了注意力之眼：他不再让镜子逐字逐句地线性阅读，而是在镜面的每一个位置，都让它能够直接"看见"句子中所有其他位置的每一个词。查询之眼负责发出疑问：「我这里需要什么信息？」钥匙之眼负责在每一个位置打上标签：「我这里有这些内容。」价值之眼则承载着每个位置真正的语义内容。查询与钥匙的匹配程度决定了注意力该放在哪里——匹配度越高，价值被提取的权重就越大。三重注视交织，让万象镜拥有了跨越整段文字、在任意距离之间精准关联语义的能力。更精妙的是，阿提锻造了不止一组眼——多头注意力让镜中同时存在八组甚至更多的"关注视角"，有的关注语法结构，有的关注语义关联，有的关注位置关系。只是，注意力的本质是无序的——「A 关注 B」与「B 在 A 前面」是不一样的信息。于是阿提在每块晶石上刻下了位置印记，用正弦和余弦的波动为每个位置嵌入了独一无二的坐标。这一切的最终造物，便是 Transformer——如今驱动着 GPT、Claude 等一切大语言模型的基石架构。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch4.k1name">注意力之眼</strong><span data-i18n="ch4.k1desc">自注意力机制（Self-Attention）。对于序列中的每个位置，计算它与其他所有位置的关联权重，加权聚合信息。公式：Attention(Q,K,V) = softmax(QK^T/√d_k) × V。时间复杂度 O(n²)，但实现了任意距离间的直接信息交互。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch4.k2name">多头注意力</strong><span data-i18n="ch4.k2desc">Multi-Head Attention。并行运行多组独立的 Q/K/V 线性投影和注意力计算，每组（每个"头"）可以学习关注不同的关系模式——语法头、语义头、距离头等。各头的输出拼接后线性变换，融合多重视角。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch4.k3name">位置印记</strong><span data-i18n="ch4.k3desc">位置编码（Positional Encoding）。注意力机制本身不感知顺序——"猫追狗"和"狗追猫"在它眼中是相同的词集合。位置编码为每个 token 注入位置信息。原版 Transformer 使用正弦/余弦函数编码，后来的模型（如 GPT）使用可学习的位置嵌入。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch4.k4name">Transformer</strong><span data-i18n="ch4.k4desc">2017 年由 Google 在《Attention Is All You Need》中提出。完全基于注意力机制，抛弃了 RNN/LSTM 的循环结构，实现了高度并行化的训练。GPT（生成式预训练）、Claude、BERT 等所有现代大语言模型均基于此架构，是过去十年 AI 领域最具影响力的发明之一。</span></div></div>
+</div></div></div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 3 — 残影之桥与归一光环
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">叁</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第三篇章</p>
-    <h3 class="chapter-title reveal">残影之桥与归一光环</h3>
-    <p class="chapter-story reveal">阿提开始堆叠越来越多的晶片层——十层、五十层、一百层。他很快遇到了一个诡异的现象：微分之风在表层劲吹，但越往镜面深处，风声越微弱。传到第五十层时已如蚊蚋振翅，到了第一百层，几乎什么都感觉不到了。这便是修行者最畏惧的<span>梯度消失</span>——深处的晶片收不到任何指引，如同沉入海底的石头，再也不曾移动。阿提在贤者的指点下搭建了<span>残影之桥</span>：与其让信号必须一层一层艰难地穿过全部晶片，不如在每隔几层之间架起一道跳跃之桥。信号可以从桥面直接跨过，不必从头走到尾——只要学会桥两端之间的"变化量"即可。与此同时，阿提为每一层施加了<span>归一光环</span>：将紊乱的气流抚平到同一尺度——均值为零，方差为一——然后让晶片自行学习何时需要打破这种归一。从此，百层之镜也能稳定修行，而不再是越深越死的绝境。</p>
+<!-- 5 -->
+<div class="chapter"><div class="chapter-numeral">伍</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch5.label">第五篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch5.title">千面之劫与遗忘沙</h3>
+<p class="chapter-story reveal" data-i18n="ch5.story">修行日渐深入，阿提发现了一件可怕的事：镜子能完美复现神谕石上的每一道细微划痕——甚至包括那些本不该被复现的随机纹路。但当他把一块全新的、从未见过的石头放到镜前时，镜子却茫然失措——它把训练石头的特有噪声当成了真理，失去了泛化到新石头的灵性。这便是修行途中最阴险的陷阱——千面之劫。阿提没有坐以待毙。他从古老的炼金术中学到了三种对抗劫难的法门：一是遗忘沙——每次修行时，他随机撒下一把细沙，暂时掩去一部分晶片。这一轮被掩去的晶片无法参与，迫使旁边的晶片学会独立承担任务。下一轮，沙落在别处，又有另一批晶片接受了淬炼。久而久之，镜中不再有任何一块晶片是不可替代的，每一片都学会了鲁棒的、不依赖同伴的通用特征。二是重量衰减——他给每一片晶片施加了一道无形的约束：你每一次的转动都需要付出代价，转得越夸张，代价越高。这让镜面偏好于"用尽量小的力量来完成尽量好的映射"，而非诉诸于极端的、只为拟合特定划痕而存在的参数。三是早停术——他在修行过程中留出了一批从未用于训练的神谕石，专门用于验证。当验证石上的失真之雾不再下降、甚至开始回升时，他果断停手。过犹不及，再练下去只是在背诵划痕，而非参悟镜之本真。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch5.k1name">千面之劫</strong><span data-i18n="ch5.k1desc">过拟合（Overfitting）。模型在训练集上表现极好（甚至达到 100% 准确率），但测试集表现远差于训练集。本质是模型记下了训练数据中的噪声和特例，而未能学到真正可泛化的规律。验证集与训练集的性能差距是诊断过拟合的核心指标。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch5.k2name">遗忘沙</strong><span data-i18n="ch5.k2desc">Dropout。训练时以概率 p（通常 0.2-0.5）随机将神经元输出置零，相当于每次迭代都在训练一个不同的子网络。推理时关闭 Dropout，对所有神经元取平均。这迫使每个神经元都学习到不依赖特定同伴的鲁棒特征，是深度学习中应用最广的正则化技术之一。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch5.k3name">重量衰减</strong><span data-i18n="ch5.k3desc">L2 正则化 / Weight Decay。在损失函数中加入权重平方和的惩罚项：Loss_total = Loss_original + λ × Σ(w²)。这使得优化器在降低原始损失的同时，也倾向于选择较小的权重值——小权重意味着模型更简单、更平滑，泛化能力更强。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch5.k4name">早停术</strong><span data-i18n="ch5.k4desc">Early Stopping。将数据分为训练集和验证集，训练过程中持续监控验证集上的损失。当验证损失停止下降并开始回升（即出现过拟合迹象）时立即停止训练，保存验证损失最低时的模型参数。简单、有效、几乎无额外计算成本。</span></div></div>
+</div></div></div>
 
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>残影之桥</strong><span>残差连接（Residual Connection）。核心公式：output = F(x) + x。网络不再被迫学习完整的输出，只需学习"相对于输入的改变量"。梯度可以通过恒等映射路径直接流向浅层，从根本上缓解了梯度消失问题。ResNet 凭此获得了 2015 年 ImageNet 冠军，并开启了百层以上的深层网络时代。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>归一光环</strong><span>LayerNorm / BatchNorm。BatchNorm 对一个 mini-batch 内的同一特征维度进行标准化；LayerNorm 对单个样本的所有特征维度进行标准化。两者都使每一层的输入分布保持稳定，允许使用更大的学习率，大幅加速训练收敛。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>梯度消失</strong><span>当网络层数过深时，链式法则中反复乘以小于 1 的导数（如 sigmoid 梯度最大仅 0.25），导致浅层的梯度趋近于零。浅层参数几乎不更新——这就是梯度消失。残差连接和 ReLU 激活函数是应对它的两大武器。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>稳定分布</strong><span>归一化使激活值的分布保持稳定，避免了"内部协变量偏移"——即每一层输入分布随训练不断变化导致的训练不稳定。实践中，使用 BatchNorm 的网络通常可以将学习率提高 10 倍以上，训练时间缩短为原来的 1/5 甚至更少。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- 6 -->
+<div class="chapter"><div class="chapter-numeral">陆</div><div class="chapter-body">
+<p class="chapter-label reveal" data-i18n="ch6.label">第六篇章</p>
+<h3 class="chapter-title reveal" data-i18n="ch6.title">大熔炉与星辰之海</h3>
+<p class="chapter-story reveal" data-i18n="ch6.story">六重修行已近终点，但还差最后一步。研磨晶片、回溯微分之风、消化亿万块神谕石——这一切需要的不是技巧，而是焚天的能量。一张普通的桌面晶片板（CPU）每次只能算寥寥几道算式，犹如在沙滩上用手指写字。而一面真正的万象镜需要的运算是海量的矩阵乘法——数以亿计的晶片同时转动、成千上万的微风同时吹拂、一场排山倒海的数值洪流。阿提在贤者的引领下来到地心深处，终于目睹了大熔炉的真面目：数以万计的 GPU 和 TPU 星辰阵列，每一颗星内部都包含数千个计算核心。它们不是一颗一颗地算，而是一排一排、一列一列地并行吞吐。这便是"星辰阵列"的由来——当一面镜子大到任何单一熔炉都容纳不下时，就把镜子切成碎片分给数千颗星辰同时训练，每颗星定期同步彼此的修行成果。更令人敬畏的是数据海洋：贤者告诉阿提，更大的镜子需要更多的神谕石来滋养，而更多的神谕石又反过来要求镜子变得更大。模型参数与数据量之间存在精确的幂律关系——这就是 Scaling Law，一盏照亮整个星辰之海的航标灯。在这场无止境的扩展中，一切最终归于矩阵运算——深度学习世界最原始的呼吸，每一口都是矩阵乘法的火焰。</p>
+<div class="tech-key">
+<div class="tech-item reveal"><div class="tech-symbol">①</div><div class="tech-text"><strong data-i18n="ch6.k1name">大熔炉</strong><span data-i18n="ch6.k1desc">GPU（图形处理器）包含数千个计算核心，专为并行矩阵运算设计。TPU（张量处理器）是 Google 为深度学习定制的 ASIC 芯片，在矩阵乘法上有极高的吞吐量。相比 CPU 的几十个核心，GPU 的上万个核心使深度学习训练速度提升了数十到数百倍。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">②</div><div class="tech-text"><strong data-i18n="ch6.k2name">星辰阵列</strong><span data-i18n="ch6.k2desc">分布式训练。数据并行：每张 GPU 持有一份完整模型副本，处理不同的数据子集，定期同步梯度（All-Reduce）。模型并行：模型太大无法放入单张 GPU 时，将不同层或同一层的不同部分拆分到多张卡上。实践中常结合两者——例如 GPT-4 使用数万张 GPU 训练数月。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">③</div><div class="tech-text"><strong data-i18n="ch6.k3name">数据海洋</strong><span data-i18n="ch6.k3desc">Scaling Law（扩展定律）。OpenAI 等机构的研究发现：模型性能与模型参数量、训练数据量、计算量三者之间存在可预测的幂律关系。更大的模型需要更多的数据，更大的计算量带来更好的性能——这直接推动了 GPT-4、Claude 等大模型的参数和数据规模竞赛。</span></div></div>
+<div class="tech-item reveal"><div class="tech-symbol">④</div><div class="tech-text"><strong data-i18n="ch6.k4name">矩阵运算</strong><span data-i18n="ch6.k4desc">深度学习最核心的计算原语。全连接层 = 矩阵乘法（GEMM），卷积层 = 矩阵乘法（im2col 变换后），注意力 = 矩阵乘法（Q×K^T 再 × V）。GPU 的架构天然为矩阵运算优化——这也是为什么 NVIDIA 在 AI 时代成为了最重要的硬件公司。</span></div></div>
+</div></div></div>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 4 — 注意力之眼
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">肆</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第四篇章</p>
-    <h3 class="chapter-title reveal">注意力之眼</h3>
-    <p class="chapter-story reveal">镜子能看清单个字词，却始终无法理解整句话的含义——尤其是当关键信息相隔甚远时。读到句尾的「他」，镜面早已忘记句首的「那个男人」。无论残影之桥怎么跳跃，信息传递的路径终究是有距离的。直到阿提锻造出了<span>注意力之眼</span>：他不再让镜子逐字逐句地线性阅读，而是在镜面的每一个位置，都让它能够直接"看见"句子中所有其他位置的每一个词。<span>查询之眼</span>负责发出疑问：「我这里需要什么信息？」<span>钥匙之眼</span>负责在每一个位置打上标签：「我这里有这些内容。」<span>价值之眼</span>则承载着每个位置真正的语义内容。查询与钥匙的匹配程度决定了注意力该放在哪里——匹配度越高，价值被提取的权重就越大。三重注视交织，让万象镜拥有了跨越整段文字、在任意距离之间精准关联语义的能力。更精妙的是，阿提锻造了不止一组眼——<span>多头注意力</span>让镜中同时存在八组甚至更多的"关注视角"，有的关注语法结构，有的关注语义关联，有的关注位置关系。只是，注意力的本质是无序的——「A 关注 B」与「B 在 A 前面」是不一样的信息。于是阿提在每块晶石上刻下了<span>位置印记</span>，用正弦和余弦的波动为每个位置嵌入了独一无二的坐标。这一切的最终造物，便是<span>Transformer</span>——如今驱动着 GPT、Claude 等一切大语言模型的基石架构。</p>
-
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>注意力之眼</strong><span>自注意力机制（Self-Attention）。对于序列中的每个位置，计算它与其他所有位置的关联权重，加权聚合信息。公式：Attention(Q,K,V) = softmax(QK^T/√d_k) × V。时间复杂度 O(n²)，但实现了任意距离间的直接信息交互。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>多头注意力</strong><span>Multi-Head Attention。并行运行多组独立的 Q/K/V 线性投影和注意力计算，每组（每个"头"）可以学习关注不同的关系模式——语法头、语义头、距离头等。各头的输出拼接后线性变换，融合多重视角。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>位置印记</strong><span>位置编码（Positional Encoding）。注意力机制本身不感知顺序——"猫追狗"和"狗追猫"在它眼中是相同的词集合。位置编码为每个 token 注入位置信息。原版 Transformer 使用正弦/余弦函数编码，后来的模型（如 GPT）使用可学习的位置嵌入。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>Transformer</strong><span>2017 年由 Google 在《Attention Is All You Need》中提出。完全基于注意力机制，抛弃了 RNN/LSTM 的循环结构，实现了高度并行化的训练。GPT（生成式预训练）、Claude、BERT 等所有现代大语言模型均基于此架构，是过去十年 AI 领域最具影响力的发明之一。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 5 — 千面之劫与遗忘沙
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">伍</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第五篇章</p>
-    <h3 class="chapter-title reveal">千面之劫与遗忘沙</h3>
-    <p class="chapter-story reveal">修行日渐深入，阿提发现了一件可怕的事：镜子能完美复现神谕石上的每一道细微划痕——甚至包括那些本不该被复现的随机纹路。但当他把一块全新的、从未见过的石头放到镜前时，镜子却茫然失措——它把训练石头的特有噪声当成了真理，失去了泛化到新石头的灵性。这便是修行途中最阴险的陷阱——<span>千面之劫</span>。阿提没有坐以待毙。他从古老的炼金术中学到了三种对抗劫难的法门：一是<span>遗忘沙</span>——每次修行时，他随机撒下一把细沙，暂时掩去一部分晶片。这一轮被掩去的晶片无法参与，迫使旁边的晶片学会独立承担任务。下一轮，沙落在别处，又有另一批晶片接受了淬炼。久而久之，镜中不再有任何一块晶片是不可替代的，每一片都学会了鲁棒的、不依赖同伴的通用特征。二是<span>重量衰减</span>——他给每一片晶片施加了一道无形的约束：你每一次的转动都需要付出代价，转得越夸张，代价越高。这让镜面偏好于"用尽量小的力量来完成尽量好的映射"，而非诉诸于极端的、只为拟合特定划痕而存在的参数。三是<span>早停术</span>——他在修行过程中留出了一批从未用于训练的神谕石，专门用于验证。当验证石上的失真之雾不再下降、甚至开始回升时，他果断停手。过犹不及，再练下去只是在背诵划痕，而非参悟镜之本真。</p>
-
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>千面之劫</strong><span>过拟合（Overfitting）。模型在训练集上表现极好（甚至达到 100% 准确率），但测试集表现远差于训练集。本质是模型记下了训练数据中的噪声和特例，而未能学到真正可泛化的规律。验证集与训练集的性能差距是诊断过拟合的核心指标。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>遗忘沙</strong><span>Dropout。训练时以概率 p（通常 0.2-0.5）随机将神经元输出置零，相当于每次迭代都在训练一个不同的子网络。推理时关闭 Dropout，对所有神经元取平均。这迫使每个神经元都学习到不依赖特定同伴的鲁棒特征，是深度学习中应用最广的正则化技术之一。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>重量衰减</strong><span>L2 正则化 / Weight Decay。在损失函数中加入权重平方和的惩罚项：Loss_total = Loss_original + λ × Σ(w²)。这使得优化器在降低原始损失的同时，也倾向于选择较小的权重值——小权重意味着模型更简单、更平滑，泛化能力更强。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>早停术</strong><span>Early Stopping。将数据分为训练集和验证集，训练过程中持续监控验证集上的损失。当验证损失停止下降并开始回升（即出现过拟合迹象）时立即停止训练，保存验证损失最低时的模型参数。简单、有效、几乎无额外计算成本。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 6 — 大熔炉与星辰之海
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="chapter">
-  <div class="chapter-numeral">陆</div>
-  <div class="chapter-body">
-    <p class="chapter-label reveal">第六篇章</p>
-    <h3 class="chapter-title reveal">大熔炉与星辰之海</h3>
-    <p class="chapter-story reveal">六重修行已近终点，但还差最后一步。研磨晶片、回溯微分之风、消化亿万块神谕石——这一切需要的不是技巧，而是焚天的能量。一张普通的桌面晶片板（CPU）每次只能算寥寥几道算式，犹如在沙滩上用手指写字。而一面真正的万象镜需要的运算是海量的矩阵乘法——数以亿计的晶片同时转动、成千上万的微风同时吹拂、一场排山倒海的数值洪流。阿提在贤者的引领下来到地心深处，终于目睹了<span>大熔炉</span>的真面目：数以万计的 GPU 和 TPU 星辰阵列，每一颗星内部都包含数千个计算核心。它们不是一颗一颗地算，而是一排一排、一列一列地并行吞吐。这便是"星辰阵列"的由来——当一面镜子大到任何单一熔炉都容纳不下时，就把镜子切成碎片分给数千颗星辰同时训练，每颗星定期同步彼此的修行成果。更令人敬畏的是<span>数据海洋</span>：贤者告诉阿提，更大的镜子需要更多的神谕石来滋养，而更多的神谕石又反过来要求镜子变得更大。模型参数与数据量之间存在精确的幂律关系——这就是 Scaling Law，一盏照亮整个星辰之海的航标灯。在这场无止境的扩展中，一切最终归于<span>矩阵运算</span>——深度学习世界最原始的呼吸，每一口都是矩阵乘法的火焰。</p>
-
-    <div class="tech-key">
-      <div class="tech-item reveal">
-        <div class="tech-symbol">①</div>
-        <div class="tech-text"><strong>大熔炉</strong><span>GPU（图形处理器）包含数千个计算核心，专为并行矩阵运算设计。TPU（张量处理器）是 Google 为深度学习定制的 ASIC 芯片，在矩阵乘法上有极高的吞吐量。相比 CPU 的几十个核心，GPU 的上万个核心使深度学习训练速度提升了数十到数百倍。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">②</div>
-        <div class="tech-text"><strong>星辰阵列</strong><span>分布式训练。数据并行：每张 GPU 持有一份完整模型副本，处理不同的数据子集，定期同步梯度（All-Reduce）。模型并行：模型太大无法放入单张 GPU 时，将不同层或同一层的不同部分拆分到多张卡上。实践中常结合两者——例如 GPT-4 使用数万张 GPU 训练数月。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">③</div>
-        <div class="tech-text"><strong>数据海洋</strong><span>Scaling Law（扩展定律）。OpenAI 等机构的研究发现：模型性能与模型参数量、训练数据量、计算量三者之间存在可预测的幂律关系。更大的模型需要更多的数据，更大的计算量带来更好的性能——这直接推动了 GPT-4、Claude 等大模型的参数和数据规模竞赛。</span></div>
-      </div>
-      <div class="tech-item reveal">
-        <div class="tech-symbol">④</div>
-        <div class="tech-text"><strong>矩阵运算</strong><span>深度学习最核心的计算原语。全连接层 = 矩阵乘法（GEMM），卷积层 = 矩阵乘法（im2col 变换后），注意力 = 矩阵乘法（Q×K^T 再 × V）。GPU 的架构天然为矩阵运算优化——这也是为什么 NVIDIA 在 AI 时代成为了最重要的硬件公司。</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     INTERLUDE — Bridge
+     BRIDGE
      ═══════════════════════════════════════════════════════════════ -->
 <div id="bridge">
   <div class="interlude-header reveal">
-    <p class="interlude-eyebrow">续篇</p>
-    <h2 class="interlude-title">断桥重铸 · 六重法则</h2>
-    <p class="interlude-desc">当镜面深处出现断裂——信息缺失、信号中断、路径阻塞——AI 如何修补？不是泥瓦匠式的简单堆砌，而是六重维度的协同补全。每一重法则都对应着前六章修行中习得的一项核心能力，在此交汇共振，织成一张修复万象的因果之网。</p>
+    <p class="interlude-eyebrow" data-i18n="bridge.eyebrow">续篇</p>
+    <h2 class="interlude-title" data-i18n="bridge.title">断桥重铸 · 六重法则</h2>
+    <p class="interlude-desc" data-i18n="bridge.desc">当镜面深处出现断裂——信息缺失、信号中断、路径阻塞——AI 如何修补？不是泥瓦匠式的简单堆砌，而是六重维度的协同补全。每一重法则都对应着前六章修行中习得的一项核心能力，在此交汇共振，织成一张修复万象的因果之网。</p>
   </div>
-
   <div class="bridge-grid">
-    <div class="bridge-card reveal">
-      <div class="bridge-num">01</div>
-      <h4>跨岸凝视</h4>
-      <p>注意力机制建立全局关联。即使中间的桥面断裂，左岸的 Query 与右岸的 Key 仍能跨越断裂直接计算亲密分数——不是修复断裂本身，而是让断裂不再成为障碍。</p>
-    </div>
-    <div class="bridge-card reveal">
-      <div class="bridge-num">02</div>
-      <h4>记忆重塑</h4>
-      <p>预训练先验提供最可能的补全。AI 在亿万块神谕石中见过千万座桥的形态——完整的、断裂的、半毁的——当断裂出现，记忆如潮水般自动填补中间，因为概率最高的那个形状，它早已熟稔于心。</p>
-    </div>
-    <div class="bridge-card reveal">
-      <div class="bridge-num">03</div>
-      <h4>定向生长</h4>
-      <p>梯度下降引导空白参数自发优化。断裂处的空缺不是被填充的——在断口放置随机晶片作为种子，然后让微分之风一层一层地雕塑它们，直到形态与两端自然衔接，如同从未断裂过一般。</p>
-    </div>
-    <div class="bridge-card reveal">
-      <div class="bridge-num">04</div>
-      <h4>旁路保通</h4>
-      <p>残差连接维持信息流通。主桥断裂时，信号立刻通过跳跃连接绕过断层——残影之桥不需要主桥是完好的。梯度仍然能反向吹拂到断裂之前的每一层，让修复不是从头开始，而是从已学会的一切之上继续。</p>
-    </div>
-    <div class="bridge-card reveal">
-      <div class="bridge-num">05</div>
-      <h4>简约约束</h4>
-      <p>正则化迫使最平滑的补全。遗忘沙防止任何一块晶片过度自信，重量衰减约束每一次修补的幅度——不是修补得越多越好，而是用最小的力气达成最自然的融合。断口如同水面合拢，天衣无缝。</p>
-    </div>
-    <div class="bridge-card reveal">
-      <div class="bridge-num">06</div>
-      <h4>多头共识</h4>
-      <p>多组注意力之眼同时审视修复结果：结构头检查断口的几何连续性——两端是否对齐；语义头检查内容的合理性——补全的语义是否与上下文一致；风格头检查协调性——填充的形态是否融入了桥的原貌。三头共审，万无一失。</p>
-    </div>
+    <div class="bridge-card reveal"><div class="bridge-num">01</div><h4 data-i18n="b1.title">跨岸凝视</h4><p data-i18n="b1.desc">注意力机制建立全局关联。即使中间的桥面断裂，左岸的 Query 与右岸的 Key 仍能跨越断裂直接计算亲密分数——不是修复断裂本身，而是让断裂不再成为障碍。</p></div>
+    <div class="bridge-card reveal"><div class="bridge-num">02</div><h4 data-i18n="b2.title">记忆重塑</h4><p data-i18n="b2.desc">预训练先验提供最可能的补全。AI 在亿万块神谕石中见过千万座桥的形态——完整的、断裂的、半毁的——当断裂出现，记忆如潮水般自动填补中间，因为概率最高的那个形状，它早已熟稔于心。</p></div>
+    <div class="bridge-card reveal"><div class="bridge-num">03</div><h4 data-i18n="b3.title">定向生长</h4><p data-i18n="b3.desc">梯度下降引导空白参数自发优化。断裂处的空缺不是被填充的——在断口放置随机晶片作为种子，然后让微分之风一层一层地雕塑它们，直到形态与两端自然衔接，如同从未断裂过一般。</p></div>
+    <div class="bridge-card reveal"><div class="bridge-num">04</div><h4 data-i18n="b4.title">旁路保通</h4><p data-i18n="b4.desc">残差连接维持信息流通。主桥断裂时，信号立刻通过跳跃连接绕过断层——残影之桥不需要主桥是完好的。梯度仍然能反向吹拂到断裂之前的每一层，让修复不是从头开始，而是从已学会的一切之上继续。</p></div>
+    <div class="bridge-card reveal"><div class="bridge-num">05</div><h4 data-i18n="b5.title">简约约束</h4><p data-i18n="b5.desc">正则化迫使最平滑的补全。遗忘沙防止任何一块晶片过度自信，重量衰减约束每一次修补的幅度——不是修补得越多越好，而是用最小的力气达成最自然的融合。断口如同水面合拢，天衣无缝。</p></div>
+    <div class="bridge-card reveal"><div class="bridge-num">06</div><h4 data-i18n="b6.title">多头共识</h4><p data-i18n="b6.desc">多组注意力之眼同时审视修复结果：结构头检查断口的几何连续性——两端是否对齐；语义头检查内容的合理性——补全的语义是否与上下文一致；风格头检查协调性——填充的形态是否融入了桥的原貌。三头共审，万无一失。</p></div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CODA — Quote
+     CODA
      ═══════════════════════════════════════════════════════════════ -->
 <div class="coda reveal" id="wisdom">
-  <p class="coda-text">镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越<em>数学</em>、<em>代码</em>和<em>耐心</em>三重迷雾的人，展露真正的光芒。</p>
-  <p class="coda-author">—— 阿提，镜之国贤者</p>
+  <p class="coda-text"><span data-i18n="coda.text1">镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越</span><em data-i18n="coda.math">数学</em><span data-i18n="coda.text2">、</span><em data-i18n="coda.code">代码</em><span data-i18n="coda.text3">和</span><em data-i18n="coda.patience">耐心</em><span data-i18n="coda.text4">三重迷雾的人，展露真正的光芒。</span></p>
+  <p class="coda-author" data-i18n="coda.author">—— 阿提，镜之国贤者</p>
 </div>
 
 </div><!-- /content-wrap -->
@@ -769,14 +570,159 @@ body {
      FOOTER
      ═══════════════════════════════════════════════════════════════ -->
 <footer class="footer">
-  <div class="footer-brand">万象镜</div>
-  <div class="footer-copy">以寓言抵达技术的深处 · 镜之国的修行永无止境</div>
+  <img src="assets/img/logo.png" alt="万象镜" class="footer-logo">
 </footer>
 
 <!-- ═══════════════════════════════════════════════════════════════
      SCRIPTS
      ═══════════════════════════════════════════════════════════════ -->
 <script>
+/* ═══════════════════════════════════════════════════════════════
+   i18n — Chinese / English
+   ═══════════════════════════════════════════════════════════════ */
+const I18N = {
+  zh: {
+    'nav.chapters':'篇章','nav.bridge':'断桥','nav.wisdom':'悟道',
+    'hero.eyebrow':'深度学习寓言','hero.title1':'镜之国的','hero.title2':'学徒',
+    'hero.desc':'在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵、注意之眼为灯，踏上了一场穿越数据迷雾、探寻镜中真相的修行。这不是神话，这是每一个深度学习模型被训练出来的故事。',
+    'hero.cta':'开启镜中之旅','hero.scroll':'向下滚动',
+    'prologue.eyebrow':'六重修行','prologue.title':'从神谕石到注意力之眼',
+    'prologue.desc':'阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。寓言是入口，技术是真相。六重篇章，从数据收集到模型训练，从网络结构到正则化技巧，最终抵达支撑一切的硬件熔炉——这是一条所有深度学习从业者都曾走过的路。',
+    'ch1.label':'第一篇章','ch1.title':'神谕石与失真之雾',
+    'ch1.story':'一切从神谕石开始。在镜之国的荒野中，散落着无数这样的石头——每一块的一面刻着模糊的图景，另一面则是对应的真相。阿提的任务看似简单：将石头举到镜前，让镜子学会从模糊映射到清晰。然而，镜子最初映出的画面与真相之间，永远隔着一层失真之雾。这雾时浓时淡，浓时意味着镜像与真实的差距巨大，淡时则近乎吻合。阿提很快明白了一个朴素的真理：石头必须先洗净——去除残缺的、纠正错误的、统一大小和色泽——否则镜子学到的一切都将建立在流沙之上。他开始将石头分批展示：每次只取一小把，64 块或 128 块，让镜子在每一批上仔细揣摩，而不至于被全部石头的浩瀚所淹没。这些机械而枯燥的工序——采集、清洗、分批——恰是整场修行中最不可逾越的根基。没有好的神谕石，就没有后来的万象镜。',
+    'ch1.k1name':'神谕石','ch1.k1desc':'标注数据（训练集）。每条数据包含输入（问题）和标签（答案），AI 从这些配对中学习映射规律。数据量、多样性和标注质量直接决定了模型的能力上限——再好的算法也无法弥补劣质数据的缺陷。',
+    'ch1.k2name':'失真之雾','ch1.k2desc':'损失函数（Loss Function）。用数学公式量化"预测值"与"真实值"之间的差距。常见的如均方误差（MSE）用于回归、交叉熵（Cross-Entropy）用于分类。损失值越大，模型表现越差——训练的目标就是让损失不断减小。',
+    'ch1.k3name':'分批展示','ch1.k3desc':'Mini-batch 训练。每次取一小批样本（通常 32/64/128 个）计算梯度并更新参数。既避免了单样本训练的震荡，又比全量数据训练更节省显存，是深度学习中最基础的训练策略之一。',
+    'ch1.k4name':'清洗石头','ch1.k4desc':'数据预处理。包括缺失值填充、异常值剔除、标准化/归一化、数据增强（翻转、裁剪、加噪）等。现实中的原始数据总是脏的——清洗质量决定模型学习的天花板，"垃圾进，垃圾出"是 AI 领域的第一定律。',
+    'ch2.label':'第二篇章','ch2.title':'微分之风与链式回溯',
+    'ch2.story':'掌握了神谕石的采集与清洗之后，贤者给了阿提一个看似玄妙的指示：「别瞎碰，要感知风。」阿提闭上眼，将手掌悬在镜面上方。起初他什么也感觉不到，直到贤者让他每次只微微转动一片晶片，观察雾气的变化。渐渐地，他感受到了一股无形的力场——微分之风。这片镜面上每一个位置的每一片晶片，风都在告诉它：往这个方向转动，雾气会变淡；往那个方向转动，雾气会变浓。更神奇的是链式回溯术：镜面深处的晶片也会影响最终的雾气，但这种影响不是直接的——风从镜面最外层开始，利用链式法则，一层一层向深处倒推，让最底层的晶片也知晓自己该如何调整。逆风而行是阿提学到的第二条铁律：风指向雾气最浓的方向，而他要做的，恰恰是逆着风向迈出一步。这一步的大小——步长——至关重要：太大，他会越过最低点，在雾谷两端来回震荡；太小，修行将永无止境。',
+    'ch2.k1name':'微分之风','ch2.k1desc':'梯度（Gradient）。损失函数对每个参数求偏导数，得到一个向量——梯度。它指向损失增长最快的方向。梯度的大小反映了该位置损失变化的陡峭程度，是参数更新的核心依据。',
+    'ch2.k2name':'链式回溯','ch2.k2desc':'反向传播（Backpropagation）。利用链式法则从输出层向输入层逐层计算梯度。每一层的梯度 = 后一层传来的梯度 × 本层激活函数的导数 × 本层的权重。这是训练一切深度神经网络的核心算法。',
+    'ch2.k3name':'逆风而行','ch2.k3desc':'梯度下降（Gradient Descent）。参数更新方向 = 负梯度方向。因为梯度指向损失上升最快的方向，所以参数要向相反方向移动才能使损失减小。这是深度学习优化的最基本思想。',
+    'ch2.k4name':'步长','ch2.k4desc':'学习率（Learning Rate）。控制每次参数更新的幅度。太大容易震荡甚至发散（损失不降反升），太小则收敛极慢。实际训练中常用学习率衰减策略：前期大步快走，后期小步精调。',
+    'ch3.label':'第三篇章','ch3.title':'残影之桥与归一光环',
+    'ch3.story':'阿提开始堆叠越来越多的晶片层——十层、五十层、一百层。他很快遇到了一个诡异的现象：微分之风在表层劲吹，但越往镜面深处，风声越微弱。传到第五十层时已如蚊蚋振翅，到了第一百层，几乎什么都感觉不到了。这便是修行者最畏惧的梯度消失——深处的晶片收不到任何指引，如同沉入海底的石头，再也不曾移动。阿提在贤者的指点下搭建了残影之桥：与其让信号必须一层一层艰难地穿过全部晶片，不如在每隔几层之间架起一道跳跃之桥。信号可以从桥面直接跨过，不必从头走到尾——只要学会桥两端之间的"变化量"即可。与此同时，阿提为每一层施加了归一光环：将紊乱的气流抚平到同一尺度——均值为零，方差为一——然后让晶片自行学习何时需要打破这种归一。从此，百层之镜也能稳定修行，而不再是越深越死的绝境。',
+    'ch3.k1name':'残影之桥','ch3.k1desc':'残差连接（Residual Connection）。核心公式：output = F(x) + x。网络不再被迫学习完整的输出，只需学习"相对于输入的改变量"。梯度可以通过恒等映射路径直接流向浅层，从根本上缓解了梯度消失问题。ResNet 凭此获得了 2015 年 ImageNet 冠军，并开启了百层以上的深层网络时代。',
+    'ch3.k2name':'归一光环','ch3.k2desc':'LayerNorm / BatchNorm。BatchNorm 对一个 mini-batch 内的同一特征维度进行标准化；LayerNorm 对单个样本的所有特征维度进行标准化。两者都使每一层的输入分布保持稳定，允许使用更大的学习率，大幅加速训练收敛。',
+    'ch3.k3name':'梯度消失','ch3.k3desc':'当网络层数过深时，链式法则中反复乘以小于 1 的导数（如 sigmoid 梯度最大仅 0.25），导致浅层的梯度趋近于零。浅层参数几乎不更新——这就是梯度消失。残差连接和 ReLU 激活函数是应对它的两大武器。',
+    'ch3.k4name':'稳定分布','ch3.k4desc':'归一化使激活值的分布保持稳定，避免了"内部协变量偏移"——即每一层输入分布随训练不断变化导致的训练不稳定。实践中，使用 BatchNorm 的网络通常可以将学习率提高 10 倍以上，训练时间缩短为原来的 1/5 甚至更少。',
+    'ch4.label':'第四篇章','ch4.title':'注意力之眼',
+    'ch4.story':'镜子能看清单个字词，却始终无法理解整句话的含义——尤其是当关键信息相隔甚远时。读到句尾的「他」，镜面早已忘记句首的「那个男人」。无论残影之桥怎么跳跃，信息传递的路径终究是有距离的。直到阿提锻造出了注意力之眼：他不再让镜子逐字逐句地线性阅读，而是在镜面的每一个位置，都让它能够直接"看见"句子中所有其他位置的每一个词。查询之眼负责发出疑问：「我这里需要什么信息？」钥匙之眼负责在每一个位置打上标签：「我这里有这些内容。」价值之眼则承载着每个位置真正的语义内容。查询与钥匙的匹配程度决定了注意力该放在哪里——匹配度越高，价值被提取的权重就越大。三重注视交织，让万象镜拥有了跨越整段文字、在任意距离之间精准关联语义的能力。更精妙的是，阿提锻造了不止一组眼——多头注意力让镜中同时存在八组甚至更多的"关注视角"，有的关注语法结构，有的关注语义关联，有的关注位置关系。只是，注意力的本质是无序的——「A 关注 B」与「B 在 A 前面」是不一样的信息。于是阿提在每块晶石上刻下了位置印记，用正弦和余弦的波动为每个位置嵌入了独一无二的坐标。这一切的最终造物，便是 Transformer——如今驱动着 GPT、Claude 等一切大语言模型的基石架构。',
+    'ch4.k1name':'注意力之眼','ch4.k1desc':'自注意力机制（Self-Attention）。对于序列中的每个位置，计算它与其他所有位置的关联权重，加权聚合信息。公式：Attention(Q,K,V) = softmax(QK^T/√d_k) × V。时间复杂度 O(n²)，但实现了任意距离间的直接信息交互。',
+    'ch4.k2name':'多头注意力','ch4.k2desc':'Multi-Head Attention。并行运行多组独立的 Q/K/V 线性投影和注意力计算，每组（每个"头"）可以学习关注不同的关系模式——语法头、语义头、距离头等。各头的输出拼接后线性变换，融合多重视角。',
+    'ch4.k3name':'位置印记','ch4.k3desc':'位置编码（Positional Encoding）。注意力机制本身不感知顺序——"猫追狗"和"狗追猫"在它眼中是相同的词集合。位置编码为每个 token 注入位置信息。原版 Transformer 使用正弦/余弦函数编码，后来的模型（如 GPT）使用可学习的位置嵌入。',
+    'ch4.k4name':'Transformer','ch4.k4desc':'2017 年由 Google 在《Attention Is All You Need》中提出。完全基于注意力机制，抛弃了 RNN/LSTM 的循环结构，实现了高度并行化的训练。GPT（生成式预训练）、Claude、BERT 等所有现代大语言模型均基于此架构，是过去十年 AI 领域最具影响力的发明之一。',
+    'ch5.label':'第五篇章','ch5.title':'千面之劫与遗忘沙',
+    'ch5.story':'修行日渐深入，阿提发现了一件可怕的事：镜子能完美复现神谕石上的每一道细微划痕——甚至包括那些本不该被复现的随机纹路。但当他把一块全新的、从未见过的石头放到镜前时，镜子却茫然失措——它把训练石头的特有噪声当成了真理，失去了泛化到新石头的灵性。这便是修行途中最阴险的陷阱——千面之劫。阿提没有坐以待毙。他从古老的炼金术中学到了三种对抗劫难的法门：一是遗忘沙——每次修行时，他随机撒下一把细沙，暂时掩去一部分晶片。这一轮被掩去的晶片无法参与，迫使旁边的晶片学会独立承担任务。下一轮，沙落在别处，又有另一批晶片接受了淬炼。久而久之，镜中不再有任何一块晶片是不可替代的，每一片都学会了鲁棒的、不依赖同伴的通用特征。二是重量衰减——他给每一片晶片施加了一道无形的约束：你每一次的转动都需要付出代价，转得越夸张，代价越高。这让镜面偏好于"用尽量小的力量来完成尽量好的映射"，而非诉诸于极端的、只为拟合特定划痕而存在的参数。三是早停术——他在修行过程中留出了一批从未用于训练的神谕石，专门用于验证。当验证石上的失真之雾不再下降、甚至开始回升时，他果断停手。过犹不及，再练下去只是在背诵划痕，而非参悟镜之本真。',
+    'ch5.k1name':'千面之劫','ch5.k1desc':'过拟合（Overfitting）。模型在训练集上表现极好（甚至达到 100% 准确率），但测试集表现远差于训练集。本质是模型记下了训练数据中的噪声和特例，而未能学到真正可泛化的规律。验证集与训练集的性能差距是诊断过拟合的核心指标。',
+    'ch5.k2name':'遗忘沙','ch5.k2desc':'Dropout。训练时以概率 p（通常 0.2-0.5）随机将神经元输出置零，相当于每次迭代都在训练一个不同的子网络。推理时关闭 Dropout，对所有神经元取平均。这迫使每个神经元都学习到不依赖特定同伴的鲁棒特征，是深度学习中应用最广的正则化技术之一。',
+    'ch5.k3name':'重量衰减','ch5.k3desc':'L2 正则化 / Weight Decay。在损失函数中加入权重平方和的惩罚项：Loss_total = Loss_original + λ × Σ(w²)。这使得优化器在降低原始损失的同时，也倾向于选择较小的权重值——小权重意味着模型更简单、更平滑，泛化能力更强。',
+    'ch5.k4name':'早停术','ch5.k4desc':'Early Stopping。将数据分为训练集和验证集，训练过程中持续监控验证集上的损失。当验证损失停止下降并开始回升（即出现过拟合迹象）时立即停止训练，保存验证损失最低时的模型参数。简单、有效、几乎无额外计算成本。',
+    'ch6.label':'第六篇章','ch6.title':'大熔炉与星辰之海',
+    'ch6.story':'六重修行已近终点，但还差最后一步。研磨晶片、回溯微分之风、消化亿万块神谕石——这一切需要的不是技巧，而是焚天的能量。一张普通的桌面晶片板（CPU）每次只能算寥寥几道算式，犹如在沙滩上用手指写字。而一面真正的万象镜需要的运算是海量的矩阵乘法——数以亿计的晶片同时转动、成千上万的微风同时吹拂、一场排山倒海的数值洪流。阿提在贤者的引领下来到地心深处，终于目睹了大熔炉的真面目：数以万计的 GPU 和 TPU 星辰阵列，每一颗星内部都包含数千个计算核心。它们不是一颗一颗地算，而是一排一排、一列一列地并行吞吐。这便是"星辰阵列"的由来——当一面镜子大到任何单一熔炉都容纳不下时，就把镜子切成碎片分给数千颗星辰同时训练，每颗星定期同步彼此的修行成果。更令人敬畏的是数据海洋：贤者告诉阿提，更大的镜子需要更多的神谕石来滋养，而更多的神谕石又反过来要求镜子变得更大。模型参数与数据量之间存在精确的幂律关系——这就是 Scaling Law，一盏照亮整个星辰之海的航标灯。在这场无止境的扩展中，一切最终归于矩阵运算——深度学习世界最原始的呼吸，每一口都是矩阵乘法的火焰。',
+    'ch6.k1name':'大熔炉','ch6.k1desc':'GPU（图形处理器）包含数千个计算核心，专为并行矩阵运算设计。TPU（张量处理器）是 Google 为深度学习定制的 ASIC 芯片，在矩阵乘法上有极高的吞吐量。相比 CPU 的几十个核心，GPU 的上万个核心使深度学习训练速度提升了数十到数百倍。',
+    'ch6.k2name':'星辰阵列','ch6.k2desc':'分布式训练。数据并行：每张 GPU 持有一份完整模型副本，处理不同的数据子集，定期同步梯度（All-Reduce）。模型并行：模型太大无法放入单张 GPU 时，将不同层或同一层的不同部分拆分到多张卡上。实践中常结合两者——例如 GPT-4 使用数万张 GPU 训练数月。',
+    'ch6.k3name':'数据海洋','ch6.k3desc':'Scaling Law（扩展定律）。OpenAI 等机构的研究发现：模型性能与模型参数量、训练数据量、计算量三者之间存在可预测的幂律关系。更大的模型需要更多的数据，更大的计算量带来更好的性能——这直接推动了 GPT-4、Claude 等大模型的参数和数据规模竞赛。',
+    'ch6.k4name':'矩阵运算','ch6.k4desc':'深度学习最核心的计算原语。全连接层 = 矩阵乘法（GEMM），卷积层 = 矩阵乘法（im2col 变换后），注意力 = 矩阵乘法（Q×K^T 再 × V）。GPU 的架构天然为矩阵运算优化——这也是为什么 NVIDIA 在 AI 时代成为了最重要的硬件公司。',
+    'bridge.eyebrow':'续篇','bridge.title':'断桥重铸 · 六重法则',
+    'bridge.desc':'当镜面深处出现断裂——信息缺失、信号中断、路径阻塞——AI 如何修补？不是泥瓦匠式的简单堆砌，而是六重维度的协同补全。每一重法则都对应着前六章修行中习得的一项核心能力，在此交汇共振，织成一张修复万象的因果之网。',
+    'b1.title':'跨岸凝视','b1.desc':'注意力机制建立全局关联。即使中间的桥面断裂，左岸的 Query 与右岸的 Key 仍能跨越断裂直接计算亲密分数——不是修复断裂本身，而是让断裂不再成为障碍。',
+    'b2.title':'记忆重塑','b2.desc':'预训练先验提供最可能的补全。AI 在亿万块神谕石中见过千万座桥的形态——完整的、断裂的、半毁的——当断裂出现，记忆如潮水般自动填补中间，因为概率最高的那个形状，它早已熟稔于心。',
+    'b3.title':'定向生长','b3.desc':'梯度下降引导空白参数自发优化。断裂处的空缺不是被填充的——在断口放置随机晶片作为种子，然后让微分之风一层一层地雕塑它们，直到形态与两端自然衔接，如同从未断裂过一般。',
+    'b4.title':'旁路保通','b4.desc':'残差连接维持信息流通。主桥断裂时，信号立刻通过跳跃连接绕过断层——残影之桥不需要主桥是完好的。梯度仍然能反向吹拂到断裂之前的每一层，让修复不是从头开始，而是从已学会的一切之上继续。',
+    'b5.title':'简约约束','b5.desc':'正则化迫使最平滑的补全。遗忘沙防止任何一块晶片过度自信，重量衰减约束每一次修补的幅度——不是修补得越多越好，而是用最小的力气达成最自然的融合。断口如同水面合拢，天衣无缝。',
+    'b6.title':'多头共识','b6.desc':'多组注意力之眼同时审视修复结果：结构头检查断口的几何连续性——两端是否对齐；语义头检查内容的合理性——补全的语义是否与上下文一致；风格头检查协调性——填充的形态是否融入了桥的原貌。三头共审，万无一失。',
+    'coda.text1':'镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越','coda.math':'数学','coda.text2':'、','coda.code':'代码','coda.text3':'和','coda.patience':'耐心','coda.text4':'三重迷雾的人，展露真正的光芒。',
+    'coda.author':'—— 阿提，镜之国贤者'
+  },
+  en: {
+    'nav.chapters':'Chapters','nav.bridge':'Bridge','nav.wisdom':'Wisdom',
+    'hero.eyebrow':'A Deep Learning Fable','hero.title1':'The Apprentice of the','hero.title2':'Mirror Kingdom',
+    'hero.desc':'At the edge of the digital continent, there lies a dust-covered Myriad Mirror. An apprentice named Ati, guided by Oracle Stones, steered by the Differential Wind, and illuminated by the Eye of Attention, embarks on a journey through the fog of data to uncover the truth within the mirror. This is not mythology — this is the story of how every deep learning model is trained.',
+    'hero.cta':'Begin the Journey','hero.scroll':'Scroll Down',
+    'prologue.eyebrow':'The Six Practices','prologue.title':'From Oracle Stones to the Eye of Attention',
+    'prologue.desc':'Every step of Ati\'s cultivation mirrors an essential principle in deep learning. The fable is the gateway; the technology is the truth. Six chapters — from data collection to model training, from network architecture to regularization, culminating in the hardware forge that powers it all. This is the path every deep learning practitioner has walked.',
+    'ch1.label':'Chapter One','ch1.title':'Oracle Stones and the Fog of Distortion',
+    'ch1.story':'It all begins with the Oracle Stones. Across the wilderness of the Mirror Kingdom, countless such stones lie scattered — each bearing a blurred image on one side and its corresponding truth on the other. Ati\'s task seems simple: hold each stone before the mirror and let the mirror learn to map blur to clarity. Yet between the mirror\'s reflection and the truth, there always hangs a Fog of Distortion — sometimes thick, sometimes thin. When thick, the gap between image and truth is vast; when thin, they nearly align. Ati quickly grasps a humble truth: the stones must first be cleansed — damaged ones removed, erroneous ones corrected, sizes and hues unified — or everything the mirror learns will be built on shifting sand. He begins presenting the stones in Mini-Batches: small handfuls at a time, 64 or 128, letting the mirror study each batch carefully without being overwhelmed by the immensity of the entire collection. These mechanical, tedious tasks — collecting, cleansing, batching — form the unshakeable foundation of the entire cultivation. Without good Oracle Stones, there would be no Myriad Mirror.',
+    'ch1.k1name':'Oracle Stones','ch1.k1desc':'Labeled data (training set). Each data point contains an input (question) and a label (answer). AI learns mapping patterns from these pairings. Data volume, diversity, and labeling quality directly determine a model\'s capability ceiling — no algorithm can compensate for poor-quality data.',
+    'ch1.k2name':'Fog of Distortion','ch1.k2desc':'Loss Function. A mathematical formula that quantifies the gap between predictions and ground truth. Common examples: Mean Squared Error (MSE) for regression, Cross-Entropy for classification. Higher loss means worse performance — the goal of training is to continuously minimize the loss.',
+    'ch1.k3name':'Mini-Batches','ch1.k3desc':'Mini-batch Training. Each iteration takes a small batch of samples (typically 32/64/128) to compute gradients and update parameters. This avoids the instability of single-sample training while being far more memory-efficient than full-dataset training — one of the most fundamental training strategies in deep learning.',
+    'ch1.k4name':'Cleansing Stones','ch1.k4desc':'Data Preprocessing. Includes missing value imputation, outlier removal, normalization/standardization, and data augmentation (flipping, cropping, adding noise). Real-world raw data is always dirty — preprocessing quality determines the ceiling of what a model can learn. "Garbage in, garbage out" is the first law of AI.',
+    'ch2.label':'Chapter Two','ch2.title':'The Differential Wind and Chain Backtracking',
+    'ch2.story':'Having mastered the collection and cleansing of Oracle Stones, Ati receives a deceptively mystical instruction from the Sage: "Don\'t fumble blindly — feel the Wind." Ati closes his eyes and hovers his palm above the mirror\'s surface. At first he feels nothing, until the Sage tells him to turn just one crystal shard at a time and observe the fog\'s response. Gradually, he senses an invisible force field — the Differential Wind. At every position on the mirror, for every crystal shard, the Wind whispers: turn this way, and the fog thins; turn that way, and the fog thickens. Even more remarkable is the Art of Chain Backtracking: crystals deep within the mirror also affect the final fog, but their influence is not direct — the Wind starts from the outermost layer and, using the Chain Rule, backtracks layer by layer toward the depths, so that even the deepest crystals know how they must adjust. Walking Against the Wind is the second iron law Ati learns: the Wind points toward the thickest fog, and what he must do is precisely the opposite — take a step against the Wind. The size of this step — the Step Length — is critical: too large, and he overshoots the valley floor, oscillating endlessly between fog peaks; too small, and the cultivation will never end.',
+    'ch2.k1name':'Differential Wind','ch2.k1desc':'Gradient. Taking the partial derivative of the loss function with respect to each parameter yields a vector — the gradient. It points in the direction of steepest loss increase. The gradient\'s magnitude reflects how sharply the loss changes at that position, serving as the foundation for all parameter updates.',
+    'ch2.k2name':'Chain Backtracking','ch2.k2desc':'Backpropagation. Uses the chain rule to compute gradients layer by layer from the output layer back to the input layer. Each layer\'s gradient = the gradient passed from the next layer × the derivative of this layer\'s activation function × this layer\'s weights. This is the core algorithm for training all deep neural networks.',
+    'ch2.k3name':'Against the Wind','ch2.k3desc':'Gradient Descent. Parameter update direction = negative gradient direction. Since the gradient points toward the steepest increase in loss, parameters must move in the opposite direction for the loss to decrease. This is the most fundamental idea in deep learning optimization.',
+    'ch2.k4name':'Step Length','ch2.k4desc':'Learning Rate. Controls the magnitude of each parameter update. Too large causes oscillation or even divergence (loss increases instead of decreasing); too small results in extremely slow convergence. In practice, learning rate scheduling is common: large steps early for fast progress, small steps later for fine-tuning.',
+    'ch3.label':'Chapter Three','ch3.title':'The Residual Bridge and Normalization Aura',
+    'ch3.story':'Ati begins stacking more and more crystal layers — ten, fifty, a hundred. He soon encounters a strange phenomenon: the Differential Wind howls fiercely at the surface, but the deeper into the mirror it travels, the fainter it becomes. By the fiftieth layer it is barely a mosquito\'s hum; by the hundredth, nothing can be felt at all. This is what cultivators dread most — Vanishing Gradient: crystals in the depths receive no guidance whatsoever, like stones sunk to the ocean floor, never to move again. Under the Sage\'s guidance, Ati builds the Residual Bridge: rather than forcing the signal to struggle through every single layer, he erects a skip-bridge between every few layers. Signals can leap across directly, without traversing the entire path — they need only learn the "delta" between the bridge\'s two ends. Meanwhile, Ati bestows a Normalization Aura upon every layer: chaotic air currents are smoothed to a single scale — zero mean, unit variance — and then the crystals themselves learn when to break free of this normalization. From then on, even a hundred-layer mirror can cultivate stably, no longer a hopeless abyss where depth means death.',
+    'ch3.k1name':'Residual Bridge','ch3.k1desc':'Residual Connection. Core formula: output = F(x) + x. The network no longer needs to learn the complete output — only the "change relative to the input." Gradients can flow directly to shallow layers through the identity mapping path, fundamentally alleviating the vanishing gradient problem. ResNet won the 2015 ImageNet competition with this architecture, ushering in the era of 100+ layer networks.',
+    'ch3.k2name':'Normalization Aura','ch3.k2desc':'LayerNorm / BatchNorm. BatchNorm normalizes the same feature dimension across a mini-batch; LayerNorm normalizes across all feature dimensions for a single sample. Both stabilize the input distribution of each layer, enabling larger learning rates and significantly accelerating training convergence.',
+    'ch3.k3name':'Vanishing Gradient','ch3.k3desc':'When networks become too deep, the chain rule repeatedly multiplies derivatives smaller than 1 (e.g., sigmoid\'s maximum gradient is only 0.25), causing gradients at shallow layers to approach zero. Shallow parameters barely update — this is the vanishing gradient problem. Residual connections and ReLU activation are the two primary weapons against it.',
+    'ch3.k4name':'Stable Distribution','ch3.k4desc':'Normalization keeps activation distributions stable, avoiding "internal covariate shift" — the phenomenon where each layer\'s input distribution constantly changes during training, causing instability. In practice, networks with BatchNorm can typically use learning rates 10× higher and train 5× faster or more.',
+    'ch4.label':'Chapter Four','ch4.title':'The Eye of Attention',
+    'ch4.story':'The mirror can see individual words clearly, yet it cannot grasp the meaning of a full sentence — especially when critical information lies far apart. Reading "him" at the end of a sentence, the mirror has already forgotten "that man" at the beginning. No matter how many Residual Bridges are built, the path of information transfer always involves distance. Until Ati forges the Eye of Attention: he no longer makes the mirror read word by word, linearly. Instead, at every position on the mirror, he lets it directly "see" every word at every other position in the entire sentence. The Query Eye asks: "What information do I need here?" The Key Eye tags every position: "Here is what I contain." The Value Eye carries each position\'s true semantic content. The degree of match between Query and Key determines where attention should fall — the higher the match, the greater the weight given to that Value. These three gazes intertwine, granting the Myriad Mirror the ability to precisely associate meaning across arbitrary distances within an entire passage. Even more ingenious: Ati forges not just one set of eyes — Multi-Head Attention allows eight or more independent "attention perspectives" to coexist in the mirror, some attending to grammatical structure, some to semantic relationships, some to positional patterns. Yet attention is inherently orderless — "A attends to B" is different from "B comes before A." So Ati engraves Positional Marks onto every crystal, using the oscillations of sine and cosine waves to embed unique coordinates for each position. The ultimate creation of all this is the Transformer — the foundational architecture that now drives every large language model: GPT, Claude, and beyond.',
+    'ch4.k1name':'Eye of Attention','ch4.k1desc':'Self-Attention. For each position in a sequence, computes attention weights with all other positions and aggregates information accordingly. Formula: Attention(Q,K,V) = softmax(QK^T/√d_k) × V. O(n²) time complexity, but enables direct information interaction between any two positions regardless of distance.',
+    'ch4.k2name':'Multi-Head Attention','ch4.k2desc':'Runs multiple independent sets of Q/K/V linear projections and attention computations in parallel. Each "head" can learn to focus on different relational patterns — syntactic heads, semantic heads, distance heads. The outputs of all heads are concatenated and linearly transformed, fusing multiple perspectives.',
+    'ch4.k3name':'Positional Marks','ch4.k3desc':'Positional Encoding. The attention mechanism itself has no sense of order — "cat chases dog" and "dog chases cat" look like identical word sets to it. Positional encoding injects position information into each token. The original Transformer uses sinusoidal functions; later models (like GPT) use learnable position embeddings.',
+    'ch4.k4name':'Transformer','ch4.k4desc':'Proposed by Google in 2017\'s "Attention Is All You Need." Built entirely on attention mechanisms, it abandons the recurrent structure of RNNs/LSTMs and enables highly parallelized training. GPT (Generative Pre-training), Claude, BERT, and all modern large language models are based on this architecture — one of the most influential inventions in AI over the past decade.',
+    'ch5.label':'Chapter Five','ch5.title':'The Thousand-Face Curse and the Sand of Forgetting',
+    'ch5.story':'As his cultivation deepens, Ati discovers something terrifying: the mirror can perfectly reproduce every microscopic scratch on the Oracle Stones — even random textures that should never have been reproduced. But when he places a completely new, never-before-seen stone before the mirror, it is utterly baffled. It has mistaken the idiosyncratic noise of the training stones for truth, losing the spiritual capacity to generalize to new stones. This is the most insidious trap on the cultivation path — the Thousand-Face Curse. Ati does not sit idle. From ancient alchemy, he learns three arts to combat the curse: First, the Sand of Forgetting — during each training session, he scatters a handful of sand randomly, temporarily obscuring some crystals. The obscured crystals cannot participate in this round, forcing neighboring crystals to learn to shoulder the task independently. In the next round, the sand falls elsewhere, tempering a different batch. Over time, no single crystal in the mirror remains irreplaceable; every shard has learned robust, universal features that do not depend on specific companions. Second, Weight Decay — he imposes an invisible constraint on every crystal: every rotation you make carries a cost; the more extreme the rotation, the higher the cost. This biases the mirror toward "achieving the best mapping with the smallest possible adjustments," rather than resorting to extreme parameters that exist solely to fit specific scratches. Third, the Art of Early Stopping — he sets aside a batch of Oracle Stones never used for training, reserved exclusively for validation. When the Fog of Distortion on these validation stones stops decreasing, or even begins to rise, he stops immediately. Enough is enough — any further training would only be memorizing scratches, not comprehending the mirror\'s true nature.',
+    'ch5.k1name':'Thousand-Face Curse','ch5.k1desc':'Overfitting. The model performs exceptionally well on the training set (potentially reaching 100% accuracy) but much worse on test data. The essence is that the model has memorized noise and idiosyncrasies in the training data rather than learning genuinely generalizable patterns. The performance gap between training and validation sets is the key diagnostic metric.',
+    'ch5.k2name':'Sand of Forgetting','ch5.k2desc':'Dropout. During training, randomly sets neuron outputs to zero with probability p (typically 0.2-0.5). Each training iteration effectively trains a different sub-network. At inference time, Dropout is disabled and all neurons are averaged. This forces every neuron to learn robust features that do not depend on specific companions — one of the most widely used regularization techniques in deep learning.',
+    'ch5.k3name':'Weight Decay','ch5.k3desc':'L2 Regularization / Weight Decay. Adds a penalty term for the sum of squared weights to the loss function: Loss_total = Loss_original + λ × Σ(w²). This encourages the optimizer to choose smaller weight values while reducing the original loss — smaller weights mean a simpler, smoother model with better generalization.',
+    'ch5.k4name':'Early Stopping','ch5.k4desc':'Split data into training and validation sets. Continuously monitor validation loss during training. When validation loss stops decreasing and begins to rise (indicating overfitting), immediately stop training and save the model parameters at the point of lowest validation loss. Simple, effective, and incurs almost no additional computational cost.',
+    'ch6.label':'Chapter Six','ch6.title':'The Great Forge and the Sea of Stars',
+    'ch6.story':'The six practices near their end, but one final step remains. Grinding crystals, backtracking the Differential Wind, digesting hundreds of millions of Oracle Stones — what this requires is not skill, but incinerating energy. An ordinary desktop crystal board (CPU) can only compute a handful of operations at a time, like writing in sand with a fingertip. But a true Myriad Mirror demands massive matrix multiplications — hundreds of millions of crystals turning in unison, thousands of winds blowing simultaneously, a cataclysmic torrent of numbers. Guided by the Sage into the depths of the earth, Ati finally beholds the true face of the Great Forge: arrays of tens of thousands of GPUs and TPUs like constellations of stars, each star containing thousands of compute cores within. They do not compute one by one — they inhale and exhale in rows and columns, in parallel. This is the origin of the "Constellation Array" — when a mirror grows too large for any single forge to contain, it is sliced into fragments distributed across thousands of stars, each training simultaneously, periodically synchronizing their cultivation progress. Even more awe-inspiring is the Sea of Data: the Sage tells Ati that larger mirrors require more Oracle Stones to nourish them, and more Oracle Stones in turn demand larger mirrors. Between model parameters and data volume exists a precise power-law relationship — this is Scaling Law, a lighthouse illuminating the entire Sea of Stars. In this endless expansion, everything ultimately returns to Matrix Multiplication — the most primordial breath of the deep learning world, every inhalation a flame of matrix products.',
+    'ch6.k1name':'The Great Forge','ch6.k1desc':'GPU (Graphics Processing Unit) contains thousands of compute cores designed for parallel matrix operations. TPU (Tensor Processing Unit) is Google\'s custom ASIC chip purpose-built for deep learning, with extreme throughput for matrix multiplication. Compared to a CPU\'s few dozen cores, a GPU\'s tens of thousands of cores accelerate deep learning training by tens to hundreds of times.',
+    'ch6.k2name':'Constellation Array','ch6.k2desc':'Distributed Training. Data Parallelism: each GPU holds a full model replica, processes different data subsets, and periodically synchronizes gradients (All-Reduce). Model Parallelism: when a model is too large for a single GPU, different layers or parts of the same layer are split across multiple cards. In practice, both are combined — GPT-4, for example, was trained on tens of thousands of GPUs over several months.',
+    'ch6.k3name':'Sea of Data','ch6.k3desc':'Scaling Law. Research from OpenAI and others has found predictable power-law relationships between model performance and three factors: parameter count, training data volume, and compute budget. Larger models need more data; more compute yields better performance. This directly drove the parameter and data scale race behind GPT-4, Claude, and other large models.',
+    'ch6.k4name':'Matrix Multiplication','ch6.k4desc':'The most fundamental compute primitive in deep learning. Fully-connected layers = matrix multiplication (GEMM), convolutional layers = matrix multiplication (after im2col transformation), attention = matrix multiplication (Q×K^T then ×V). GPU architectures are inherently optimized for matrix multiplication — which is why NVIDIA became the most important hardware company in the AI era.',
+    'bridge.eyebrow':'Interlude','bridge.title':'Rebuilding the Broken Bridge · Six Principles',
+    'bridge.desc':'When fractures appear deep within the mirror — missing information, interrupted signals, blocked pathways — how does AI repair them? Not through crude patchwork, but through six-dimensional collaborative restoration. Each principle corresponds to a core capability forged in the six preceding chapters, converging and resonating here to weave a web that restores the Myriad.',
+    'b1.title':'Crossing the Gaze','b1.desc':'Attention mechanisms establish global connections. Even when the bridge\'s middle span has collapsed, the Query on the left bank can still compute affinity scores directly with the Key on the right bank — not repairing the fracture itself, but making the fracture cease to be an obstacle.',
+    'b2.title':'Memory Reforged','b2.desc':'Pre-trained priors provide the most probable completion. The AI has seen millions of bridge forms across billions of Oracle Stones — whole, broken, half-destroyed. When a fracture appears, memory surges like a tide to fill the gap, because the shape with the highest probability is one it has long known by heart.',
+    'b3.title':'Directed Growth','b3.desc':'Gradient descent guides blank parameters to optimize spontaneously. The void at the fracture is not filled — random crystals are placed at the break as seeds, and the Differential Wind sculpts them layer by layer until the form seamlessly joins both ends, as if it had never been broken.',
+    'b4.title':'Bypass Preserved','b4.desc':'Residual connections maintain the flow of information. When the main bridge breaks, signals immediately route through skip connections — the Residual Bridge does not require the main bridge to be intact. Gradients can still blow backward to every layer before the fracture, so repair does not start from scratch but continues from everything already learned.',
+    'b5.title':'Simplicity Constrained','b5.desc':'Regularization forces the smoothest possible completion. The Sand of Forgetting prevents any single crystal from becoming overconfident; Weight Decay constrains the magnitude of every repair. The goal is not to patch as much as possible, but to achieve the most natural fusion with the least force — the break seals like water closing, seamless.',
+    'b6.title':'Multi-Head Consensus','b6.desc':'Multiple attention heads examine the repair simultaneously: the Structure Head checks geometric continuity — whether the two ends align; the Semantic Head verifies content coherence — whether the completed semantics match the context; the Style Head evaluates harmony — whether the filled form blends into the bridge\'s original character. Three heads, one verdict.',
+    'coda.text1':'The mirror is always there. It refuses no one, yet it only reveals its true radiance to those willing to cross the threefold fog of ','coda.math':'mathematics','coda.text2':', ','coda.code':'code','coda.text3':', and ','coda.patience':'patience','coda.text4':'.',
+    'coda.author':'— Ati, Sage of the Mirror Kingdom'
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'zh';
+function t(key) { return I18N[currentLang]?.[key] || I18N.zh[key] || key; }
+function applyLang() {
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  document.title = currentLang === 'zh' ? '万象镜 · 镜之国的学徒' : 'Myriad Mirror · Apprentice of the Mirror Kingdom';
+  const btn = document.getElementById('btn-lang');
+  btn.textContent = currentLang === 'zh' ? 'EN' : '中';
+  btn.title = currentLang === 'zh' ? 'Switch to English' : '切换到中文';
+  btn.setAttribute('aria-label', currentLang === 'zh' ? 'Switch to English' : '切换到中文');
+  localStorage.setItem('lang', currentLang);
+}
+document.getElementById('btn-lang').addEventListener('click', () => {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  applyLang();
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   Theme Toggle — Dark / Light
+   ═══════════════════════════════════════════════════════════════ */
+const themeBtn = document.getElementById('btn-theme');
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') { document.body.classList.add('dark'); themeBtn.textContent = '◐'; themeBtn.title = '日光模式'; themeBtn.setAttribute('aria-label', '切换日光模式'); }
+themeBtn.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark');
+  themeBtn.textContent = isDark ? '◐' : '◑';
+  themeBtn.title = isDark ? '日光模式' : '暗黑模式';
+  themeBtn.setAttribute('aria-label', isDark ? '切换日光模式' : '切换暗黑模式');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
 /* ═══════════════════════════════════════════════════════════════
    Orbits Arrival — Ink Rings
    ═══════════════════════════════════════════════════════════════ */
@@ -805,8 +751,7 @@ body {
   function spectrumAt(stops, t) {
     if (!stops || !stops.length) return [200,200,200];
     if (stops.length === 1) return stops[0].slice();
-    var x = clamp01(t) * (stops.length - 1);
-    var i = Math.floor(x), f = x - i;
+    var x = clamp01(t) * (stops.length - 1); var i = Math.floor(x), f = x - i;
     if (i >= stops.length - 1) return stops[stops.length - 1].slice();
     return lerpRgb(stops[i], stops[i+1], f);
   }
@@ -817,258 +762,79 @@ body {
     if (max !== min) {
       var d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-        case g: h = ((b - r) / d + 2) / 6; break;
-        default: h = ((r - g) / d + 4) / 6; break;
-      }
+      switch (max) { case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break; case g: h = ((b - r) / d + 2) / 6; break; default: h = ((r - g) / d + 4) / 6; break; }
     }
     return [h * 360, s, l];
   }
-  function hue2rgb(p,q,t) {
-    if (t < 0) t += 1; if (t > 1) t -= 1;
-    if (t < 1/6) return p + (q - p) * 6 * t;
-    if (t < 1/2) return q;
-    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-    return p;
-  }
-  function hslToRgb(h,s,l) {
-    h = ((h % 360) + 360) % 360 / 360;
-    var r,g,b;
-    if (s === 0) { r = g = b = l; }
-    else {
-      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      var p = 2 * l - q;
-      r = hue2rgb(p, q, h + 1/3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1/3);
-    }
-    return [r * 255, g * 255, b * 255];
-  }
-  function shiftHue(rgb, deg, satBoost, lightBoost) {
-    var hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-    return hslToRgb(hsl[0] + deg, clamp01(hsl[1] * (satBoost == null ? 1 : satBoost)), clamp01(hsl[2] + (lightBoost || 0)));
-  }
-  function inkRgba(rgb, a) {
-    return 'rgba(' + Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]) + ',' + a + ')';
-  }
+  function hue2rgb(p,q,t) { if (t < 0) t += 1; if (t > 1) t -= 1; if (t < 1/6) return p + (q - p) * 6 * t; if (t < 1/2) return q; if (t < 2/3) return p + (q - p) * (2/3 - t) * 6; return p; }
+  function hslToRgb(h,s,l) { h = ((h % 360) + 360) % 360 / 360; if (s === 0) return [l*255,l*255,l*255]; var q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q; return [hue2rgb(p,q,h+1/3)*255, hue2rgb(p,q,h)*255, hue2rgb(p,q,h-1/3)*255]; }
+  function shiftHue(rgb, deg, satBoost, lightBoost) { var hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]); return hslToRgb(hsl[0] + deg, clamp01(hsl[1] * (satBoost == null ? 1 : satBoost)), clamp01(hsl[2] + (lightBoost || 0))); }
+  function inkRgba(rgb, a) { return 'rgba(' + Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]) + ',' + a + ')'; }
   function unitBase(u) { return u.base || u; }
 
-  function ringRgb(p, name, index, max) {
-    var u = p.units[name];
-    var t = max <= 1 ? 0.5 : index / Math.max(1, max - 1);
-    var wobble = (hash(index * 17.3 + name.length * 9.1) - 0.5) * 0.08;
-    return spectrumAt(u.spectrum, clamp01(t + wobble));
-  }
-  function makeRingInk(p, name, index, max) {
-    var base = ringRgb(p, name, index, max);
-    return function (a, angle) {
-      if (angle == null) return inkRgba(base, a);
-      var shimmer = Math.sin(angle * 3.2 + index * 0.7) * 22 + Math.cos(angle * 5.1 + index) * 12;
-      var lit = Math.sin(angle * 2 + index * 1.3) * 0.04;
-      return inkRgba(shiftHue(base, shimmer, 1.08, lit), a);
-    };
-  }
-  function makeRingMark(p, name, index, max) {
-    var base = ringRgb(p, name, index, max);
-    var mark = shiftHue(base, 18, 0.85, 0.18);
-    var pearl = lerpRgb(mark, p.mark, 0.45);
-    return function (a, angle) {
-      if (angle == null) return inkRgba(pearl, a);
-      var shimmer = Math.sin(angle * 4.1 + index) * 28;
-      return inkRgba(shiftHue(pearl, shimmer, 1.05, 0.06), a);
-    };
-  }
+  function ringRgb(p, name, index, max) { var u = p.units[name], t = max <= 1 ? 0.5 : index / Math.max(1, max - 1), wobble = (hash(index * 17.3 + name.length * 9.1) - 0.5) * 0.08; return spectrumAt(u.spectrum, clamp01(t + wobble)); }
+  function makeRingInk(p, name, index, max) { var base = ringRgb(p, name, index, max); return function (a, angle) { if (angle == null) return inkRgba(base, a); var shimmer = Math.sin(angle * 3.2 + index * 0.7) * 22 + Math.cos(angle * 5.1 + index) * 12, lit = Math.sin(angle * 2 + index * 1.3) * 0.04; return inkRgba(shiftHue(base, shimmer, 1.08, lit), a); }; }
+  function makeRingMark(p, name, index, max) { var base = ringRgb(p, name, index, max), mark = shiftHue(base, 18, 0.85, 0.18), pearl = lerpRgb(mark, p.mark, 0.45); return function (a, angle) { if (angle == null) return inkRgba(pearl, a); var shimmer = Math.sin(angle * 4.1 + index) * 28; return inkRgba(shiftHue(pearl, shimmer, 1.05, 0.06), a); }; }
 
-  function ringSpec(unit, index, max) {
-    var seed = hash(unit * 97 + index * 13.7 + 0.31);
-    var seed2 = hash(unit * 41 + index * 19.3 + 2.17);
-    return {
-      unit: unit, index: index, seed: seed,
-      ecc: 0.92 + seed * 0.12,
-      wobble: (seed2 - 0.5) * 0.035,
-      spinRate: (0.04 + seed * 0.11) * (seed2 > 0.5 ? 1 : -1) * (1 + index / (max + 4)),
-      phase0: seed * TAU,
-      dashGap: 0.12 + seed * 0.35,
-      dashLen: 0.35 + seed2 * 0.55,
-      blotCount: 2 + Math.floor(seed * 5),
-      thickness: 0.55 + seed2 * 0.9
-    };
-  }
+  function ringSpec(unit, index, max) { var seed = hash(unit * 97 + index * 13.7 + 0.31), seed2 = hash(unit * 41 + index * 19.3 + 2.17); return { unit: unit, index: index, seed: seed, ecc: 0.92 + seed * 0.12, wobble: (seed2 - 0.5) * 0.035, spinRate: (0.04 + seed * 0.11) * (seed2 > 0.5 ? 1 : -1) * (1 + index / (max + 4)), phase0: seed * TAU, dashGap: 0.12 + seed * 0.35, dashLen: 0.35 + seed2 * 0.55, blotCount: 2 + Math.floor(seed * 5), thickness: 0.55 + seed2 * 0.9 }; }
 
-  function bandRadii(band, count, u) {
-    var ranges = { outer: { inner: 0.34, outer: 0.46 }, mid: { inner: 0.20, outer: 0.325 }, inner: { inner: 0.075, outer: 0.185 } };
-    var r = ranges[band], out = [];
-    for (var i = 0; i < count; i++) {
-      var t = count === 1 ? 0.5 : i / (count - 1);
-      out.push((r.inner + (r.outer - r.inner) * t) * u);
-    }
-    return out;
-  }
+  function bandRadii(band, count, u) { var ranges = { outer: { inner: 0.34, outer: 0.46 }, mid: { inner: 0.20, outer: 0.325 }, inner: { inner: 0.075, outer: 0.185 } }; var r = ranges[band], out = []; for (var i = 0; i < count; i++) { var t = count === 1 ? 0.5 : i / (count - 1); out.push((r.inner + (r.outer - r.inner) * t) * u); } return out; }
 
   function drawLogogramRing(c, cx, cy, radius, spec, color, mark, epoch) {
-    var spin = reducedMotion ? spec.phase0 : spec.phase0 + epoch * spec.spinRate;
-    var rx = radius, ry = radius * spec.ecc;
-    var blotSteps = reducedMotion ? 0 : spec.blotCount;
-    c.save();
-    c.translate(cx, cy);
-    c.rotate(spin);
-    c.rotate(spec.wobble);
-    c.beginPath();
-    c.ellipse(0, 0, rx, ry, 0, 0, TAU);
-    c.strokeStyle = color(0.14, 0);
-    c.lineWidth = Math.max(2.8, radius * 0.022);
-    c.stroke();
-    c.lineCap = 'round'; c.lineJoin = 'round';
-    var a = 0;
+    var spin = reducedMotion ? spec.phase0 : spec.phase0 + epoch * spec.spinRate, rx = radius, ry = radius * spec.ecc, blotSteps = reducedMotion ? 0 : spec.blotCount;
+    c.save(); c.translate(cx, cy); c.rotate(spin); c.rotate(spec.wobble);
+    c.beginPath(); c.ellipse(0, 0, rx, ry, 0, 0, TAU); c.strokeStyle = color(0.14, 0); c.lineWidth = Math.max(2.8, radius * 0.022); c.stroke();
+    c.lineCap = 'round'; c.lineJoin = 'round'; var a = 0;
     while (a < TAU - 0.02) {
-      var len = spec.dashLen * (0.7 + hash(spec.seed + a * 8) * 0.6);
-      var gap = spec.dashGap * (0.45 + hash(spec.seed + a * 11) * 0.75);
-      var a1 = Math.min(TAU, a + len);
-      var midA = (a + a1) * 0.5;
-      c.beginPath();
-      c.ellipse(0, 0, rx, ry, 0, a, a1);
-      c.strokeStyle = color(0.44 + hash(spec.seed + a) * 0.36, midA);
-      c.lineWidth = Math.max(1.1, radius * 0.0065 * spec.thickness);
-      c.stroke();
-      if (hash(spec.seed * 3 + a) > 0.55) {
-        var cos = Math.cos(midA), sin = Math.sin(midA);
-        var inward = 1 - (0.014 + hash(midA) * 0.024);
-        var outward = 1 + (0.01 + hash(midA + 1) * 0.022);
-        c.beginPath();
-        c.moveTo(cos * rx * inward, sin * ry * inward);
-        c.lineTo(cos * rx * outward, sin * ry * outward);
-        c.strokeStyle = color(0.68, midA);
-        c.lineWidth = Math.max(0.9, radius * 0.005);
-        c.stroke();
-      }
+      var len = spec.dashLen * (0.7 + hash(spec.seed + a * 8) * 0.6), gap = spec.dashGap * (0.45 + hash(spec.seed + a * 11) * 0.75), a1 = Math.min(TAU, a + len), midA = (a + a1) * 0.5;
+      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, a, a1); c.strokeStyle = color(0.44 + hash(spec.seed + a) * 0.36, midA); c.lineWidth = Math.max(1.1, radius * 0.0065 * spec.thickness); c.stroke();
+      if (hash(spec.seed * 3 + a) > 0.55) { var cos = Math.cos(midA), sin = Math.sin(midA), inward = 1 - (0.014 + hash(midA) * 0.024), outward = 1 + (0.01 + hash(midA + 1) * 0.022); c.beginPath(); c.moveTo(cos * rx * inward, sin * ry * inward); c.lineTo(cos * rx * outward, sin * ry * outward); c.strokeStyle = color(0.68, midA); c.lineWidth = Math.max(0.9, radius * 0.005); c.stroke(); }
       a = a1 + gap;
     }
-    for (var b = 0; b < blotSteps; b++) {
-      var ba = (spec.phase0 + b / Math.max(1, blotSteps) * TAU + hash(spec.index + b) * 0.4) % TAU;
-      var bx = Math.cos(ba) * rx, by = Math.sin(ba) * ry;
-      var br = Math.max(1.1, radius * (0.008 + hash(spec.seed + b) * 0.014));
-      c.fillStyle = mark(0.5 + hash(b + spec.seed) * 0.35, ba);
-      c.beginPath(); c.arc(bx, by, br, 0, TAU); c.fill();
-      c.strokeStyle = color(0.72, ba); c.lineWidth = 0.9;
-      c.beginPath(); c.arc(bx, by, br * 1.4, 0.2, Math.PI * 1.4); c.stroke();
-    }
-    if (!reducedMotion) {
-      var lead = (epoch * spec.spinRate * 1.7 + spec.phase0) % TAU;
-      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead, lead + 0.7);
-      c.strokeStyle = color(0.9, lead + 0.35); c.lineWidth = Math.max(1.6, radius * 0.009); c.stroke();
-      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead + 0.15, lead + 0.45);
-      c.strokeStyle = mark(0.62, lead + 0.3); c.lineWidth = Math.max(0.8, radius * 0.004); c.stroke();
-      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead - 0.55, lead);
-      c.strokeStyle = color(0.28, lead - 0.25); c.lineWidth = Math.max(1.0, radius * 0.005); c.stroke();
-    }
+    for (var b = 0; b < blotSteps; b++) { var ba = (spec.phase0 + b / Math.max(1, blotSteps) * TAU + hash(spec.index + b) * 0.4) % TAU, bx = Math.cos(ba) * rx, by = Math.sin(ba) * ry, br = Math.max(1.1, radius * (0.008 + hash(spec.seed + b) * 0.014)); c.fillStyle = mark(0.5 + hash(b + spec.seed) * 0.35, ba); c.beginPath(); c.arc(bx, by, br, 0, TAU); c.fill(); c.strokeStyle = color(0.72, ba); c.lineWidth = 0.9; c.beginPath(); c.arc(bx, by, br * 1.4, 0.2, Math.PI * 1.4); c.stroke(); }
+    if (!reducedMotion) { var lead = (epoch * spec.spinRate * 1.7 + spec.phase0) % TAU; c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead, lead + 0.7); c.strokeStyle = color(0.9, lead + 0.35); c.lineWidth = Math.max(1.6, radius * 0.009); c.stroke(); c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead + 0.15, lead + 0.45); c.strokeStyle = mark(0.62, lead + 0.3); c.lineWidth = Math.max(0.8, radius * 0.004); c.stroke(); c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead - 0.55, lead); c.strokeStyle = color(0.28, lead - 0.25); c.lineWidth = Math.max(1.0, radius * 0.005); c.stroke(); }
     c.restore();
   }
 
   function drawNucleus(c, cx, cy, u, epoch) {
-    var p = PALETTE;
-    var outerInk = unitBase(p.units.outer);
-    var midInk = unitBase(p.units.mid);
-    var innerInk = unitBase(p.units.inner);
-    c.save();
-    var R = u * 0.055;
-    var field = c.createRadialGradient(cx, cy, 0, cx, cy, R * 2.8);
-    field.addColorStop(0, inkRgba(innerInk, reducedMotion ? 0.32 : 0.42));
-    field.addColorStop(0.35, inkRgba(midInk, 0.16));
-    field.addColorStop(0.7, inkRgba(outerInk, 0.08));
-    field.addColorStop(1, inkRgba(outerInk, 0));
+    var p = PALETTE, outerInk = unitBase(p.units.outer), midInk = unitBase(p.units.mid), innerInk = unitBase(p.units.inner);
+    c.save(); var R = u * 0.055, field = c.createRadialGradient(cx, cy, 0, cx, cy, R * 2.8);
+    field.addColorStop(0, inkRgba(innerInk, reducedMotion ? 0.32 : 0.42)); field.addColorStop(0.35, inkRgba(midInk, 0.16)); field.addColorStop(0.7, inkRgba(outerInk, 0.08)); field.addColorStop(1, inkRgba(outerInk, 0));
     c.fillStyle = field; c.beginPath(); c.arc(cx, cy, R * 2.8, 0, TAU); c.fill();
-    var spin = reducedMotion ? 0 : epoch * 0.15;
-    var cores = [outerInk, midInk, innerInk];
-    for (var i = 0; i < 3; i++) {
-      var rr = R * (0.35 + i * 0.28);
-      var tint = shiftHue(cores[i], reducedMotion ? 0 : epoch * (8 + i * 4), 1.1, 0.05);
-      c.save(); c.translate(cx, cy); c.rotate(spin * (i % 2 ? -1 : 1) + i);
-      c.beginPath(); c.ellipse(0, 0, rr, rr * 0.9, 0, 0.2, TAU - 0.4);
-      c.strokeStyle = inkRgba(tint, 0.5 + i * 0.16); c.lineWidth = 1.4 + i * 0.4; c.stroke();
-      c.restore();
-    }
-    c.fillStyle = inkRgba(p.mark, 0.95);
-    c.beginPath(); c.arc(cx, cy, Math.max(2, u * 0.008), 0, TAU); c.fill();
-    c.restore();
+    var spin = reducedMotion ? 0 : epoch * 0.15, cores = [outerInk, midInk, innerInk];
+    for (var i = 0; i < 3; i++) { var rr = R * (0.35 + i * 0.28), tint = shiftHue(cores[i], reducedMotion ? 0 : epoch * (8 + i * 4), 1.1, 0.05); c.save(); c.translate(cx, cy); c.rotate(spin * (i % 2 ? -1 : 1) + i); c.beginPath(); c.ellipse(0, 0, rr, rr * 0.9, 0, 0.2, TAU - 0.4); c.strokeStyle = inkRgba(tint, 0.5 + i * 0.16); c.lineWidth = 1.4 + i * 0.4; c.stroke(); c.restore(); }
+    c.fillStyle = inkRgba(p.mark, 0.95); c.beginPath(); c.arc(cx, cy, Math.max(2, u * 0.008), 0, TAU); c.fill(); c.restore();
   }
 
-  function drawSpectrumBand(c, cx, cy, inner, outer, spectrum, alpha) {
-    var mid = (inner + outer) * 0.5;
-    var width = Math.max(10, (outer - inner) * 0.95);
-    var stops = spectrum || [[180, 180, 180]];
-    c.beginPath(); c.arc(cx, cy, mid, 0, TAU);
-    if (typeof c.createConicGradient === 'function') {
-      var grad = c.createConicGradient(0, cx, cy);
-      var last = stops.length - 1;
-      for (var i = 0; i <= last; i++) grad.addColorStop(last === 0 ? 0 : i / last, inkRgba(stops[i], alpha));
-      if (last > 0) grad.addColorStop(1, inkRgba(stops[0], alpha));
-      c.strokeStyle = grad;
-    } else {
-      c.strokeStyle = inkRgba(stops[Math.floor(stops.length / 2)], alpha);
-    }
-    c.lineWidth = width; c.stroke();
-  }
+  function drawSpectrumBand(c, cx, cy, inner, outer, spectrum, alpha) { var mid = (inner + outer) * 0.5, width = Math.max(10, (outer - inner) * 0.95), stops = spectrum || [[180, 180, 180]]; c.beginPath(); c.arc(cx, cy, mid, 0, TAU); if (typeof c.createConicGradient === 'function') { var grad = c.createConicGradient(0, cx, cy), last = stops.length - 1; for (var i = 0; i <= last; i++) grad.addColorStop(last === 0 ? 0 : i / last, inkRgba(stops[i], alpha)); if (last > 0) grad.addColorStop(1, inkRgba(stops[0], alpha)); c.strokeStyle = grad; } else { c.strokeStyle = inkRgba(stops[Math.floor(stops.length / 2)], alpha); } c.lineWidth = width; c.stroke(); }
 
-  function resize() {
-    var r = canvas.parentElement.getBoundingClientRect();
-    W = Math.max(1, Math.round(r.width));
-    H = Math.max(1, Math.round(r.height));
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(W * DPR);
-    canvas.height = Math.round(H * DPR);
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  }
+  function resize() { var r = canvas.parentElement.getBoundingClientRect(); W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height)); DPR = Math.min(window.devicePixelRatio || 1, 2); canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
 
   var OUTER_COUNT = 8, MID_COUNT = 12, INNER_COUNT = 6;
   function draw(epoch) {
-    ctx.clearRect(0, 0, W, H);
-    var p = PALETTE, u = Math.min(W, H);
-    var cx = W / 2, cy = H / 2;
-    var outerU = unitBase(p.units.outer);
-    var midU = unitBase(p.units.mid);
-    var innerU = unitBase(p.units.inner);
+    ctx.clearRect(0, 0, W, H); var p = PALETTE, u = Math.min(W, H), cx = W / 2, cy = H / 2;
+    var outerU = unitBase(p.units.outer), midU = unitBase(p.units.mid), innerU = unitBase(p.units.inner);
     var ground = ctx.createRadialGradient(cx, cy * 0.2, 0, cx, cy, Math.max(W, H) * 0.75);
     ground.addColorStop(0, p.top); ground.addColorStop(0.55, p.bg); ground.addColorStop(1, p.bg2);
     ctx.fillStyle = ground; ctx.fillRect(0, 0, W, H);
     var glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, u * 0.52);
-    glow.addColorStop(0, inkRgba(innerU, reducedMotion ? 0.12 : 0.18));
-    glow.addColorStop(0.35, inkRgba(midU, 0.08));
-    glow.addColorStop(0.65, inkRgba(outerU, 0.05));
-    glow.addColorStop(1, inkRgba(outerU, 0));
+    glow.addColorStop(0, inkRgba(innerU, reducedMotion ? 0.12 : 0.18)); glow.addColorStop(0.35, inkRgba(midU, 0.08)); glow.addColorStop(0.65, inkRgba(outerU, 0.05)); glow.addColorStop(1, inkRgba(outerU, 0));
     ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, u * 0.52, 0, TAU); ctx.fill();
     drawSpectrumBand(ctx, cx, cy, u * 0.34, u * 0.46, p.units.outer.spectrum, 0.09);
     drawSpectrumBand(ctx, cx, cy, u * 0.20, u * 0.325, p.units.mid.spectrum, 0.09);
     drawSpectrumBand(ctx, cx, cy, u * 0.075, u * 0.185, p.units.inner.spectrum, 0.1);
-    var outerRadii = bandRadii('outer', OUTER_COUNT, u);
-    var midRadii = bandRadii('mid', MID_COUNT, u);
-    var innerRadii = bandRadii('inner', INNER_COUNT, u);
-    var i, spec, ink, mark;
-    for (i = 0; i < outerRadii.length; i++) {
-      spec = ringSpec(1, i, OUTER_COUNT); ink = makeRingInk(p, 'outer', i, OUTER_COUNT); mark = makeRingMark(p, 'outer', i, OUTER_COUNT);
-      drawLogogramRing(ctx, cx, cy, outerRadii[i], spec, ink, mark, epoch);
-    }
-    for (i = 0; i < midRadii.length; i++) {
-      spec = ringSpec(2, i, MID_COUNT); ink = makeRingInk(p, 'mid', i, MID_COUNT); mark = makeRingMark(p, 'mid', i, MID_COUNT);
-      drawLogogramRing(ctx, cx, cy, midRadii[i], spec, ink, mark, epoch);
-    }
-    for (i = 0; i < innerRadii.length; i++) {
-      spec = ringSpec(3, i, INNER_COUNT); ink = makeRingInk(p, 'inner', i, INNER_COUNT); mark = makeRingMark(p, 'inner', i, INNER_COUNT);
-      drawLogogramRing(ctx, cx, cy, innerRadii[i], spec, ink, mark, epoch);
-    }
+    var outerRadii = bandRadii('outer', OUTER_COUNT, u), midRadii = bandRadii('mid', MID_COUNT, u), innerRadii = bandRadii('inner', INNER_COUNT, u);
+    for (var i = 0; i < outerRadii.length; i++) { var spec = ringSpec(1, i, OUTER_COUNT), ink = makeRingInk(p, 'outer', i, OUTER_COUNT), mark = makeRingMark(p, 'outer', i, OUTER_COUNT); drawLogogramRing(ctx, cx, cy, outerRadii[i], spec, ink, mark, epoch); }
+    for (var i = 0; i < midRadii.length; i++) { var spec = ringSpec(2, i, MID_COUNT), ink = makeRingInk(p, 'mid', i, MID_COUNT), mark = makeRingMark(p, 'mid', i, MID_COUNT); drawLogogramRing(ctx, cx, cy, midRadii[i], spec, ink, mark, epoch); }
+    for (var i = 0; i < innerRadii.length; i++) { var spec = ringSpec(3, i, INNER_COUNT), ink = makeRingInk(p, 'inner', i, INNER_COUNT), mark = makeRingMark(p, 'inner', i, INNER_COUNT); drawLogogramRing(ctx, cx, cy, innerRadii[i], spec, ink, mark, epoch); }
     drawNucleus(ctx, cx, cy, u, epoch);
     ctx.lineWidth = 1.2; ctx.setLineDash([3, 7]);
-    [{frac:0.185,rgb:innerU},{frac:0.325,rgb:midU},{frac:0.46,rgb:outerU}].forEach(function(sep){
-      ctx.strokeStyle = inkRgba(sep.rgb, 0.28); ctx.beginPath(); ctx.arc(cx, cy, u * sep.frac, 0, TAU); ctx.stroke();
-    });
+    [{frac:0.185,rgb:innerU},{frac:0.325,rgb:midU},{frac:0.46,rgb:outerU}].forEach(function(sep){ ctx.strokeStyle = inkRgba(sep.rgb, 0.28); ctx.beginPath(); ctx.arc(cx, cy, u * sep.frac, 0, TAU); ctx.stroke(); });
     ctx.setLineDash([]);
   }
 
   var raf = null, lastLoop = 0;
-  function loop(time) {
-    if (!reducedMotion || time - lastLoop >= 66) { lastLoop = time; draw(time / 1000); }
-    raf = requestAnimationFrame(loop);
-  }
+  function loop(time) { if (!reducedMotion || time - lastLoop >= 66) { lastLoop = time; draw(time / 1000); } raf = requestAnimationFrame(loop); }
   window.addEventListener('resize', resize);
   resize(); raf = requestAnimationFrame(loop);
 })();
@@ -1077,35 +843,22 @@ body {
    UI Interactions
    ═══════════════════════════════════════════════════════════════ */
 (function() {
-  var navbar = document.getElementById('navbar');
-  var hero = document.getElementById('hero');
-
+  var navbar = document.getElementById('navbar'), hero = document.getElementById('hero');
   function onScroll() {
-    var y = window.scrollY;
-    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    var y = window.scrollY, heroBottom = hero.offsetTop + hero.offsetHeight;
     navbar.classList.toggle('on-dark', y < heroBottom - 100);
-
-    var sections = document.querySelectorAll('section[id], div[id]');
-    var links = document.querySelectorAll('.nav-link');
-    var current = '';
-    sections.forEach(function(sec) {
-      if (y >= sec.offsetTop - 200) current = sec.getAttribute('id');
-    });
-    links.forEach(function(link) {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-    });
+    var sections = document.querySelectorAll('section[id], div[id]'), links = document.querySelectorAll('.nav-link'), current = '';
+    sections.forEach(function(sec) { if (y >= sec.offsetTop - 200) current = sec.getAttribute('id'); });
+    links.forEach(function(link) { link.classList.toggle('active', link.getAttribute('href') === '#' + current); });
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  /* Intersection Observer — reveal on scroll */
   var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
+    entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  applyLang();
 })();
 </script>
 </body>
