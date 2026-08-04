@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="万象镜 · 镜之国的学徒 — 以寓言抵达深度学习技术的深处。六重修行，从神谕石到注意力之眼。">
+  <meta name="theme-color" content="#070604">
+  <title>万象镜 · 镜之国的学徒</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/wanxiang_mirror.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav-wrap" aria-label="主导航">
+    <div class="nav-pill on-dark" id="navbar">
+      <a href="#" class="nav-logo">万象镜</a>
+      <a href="#chapters" class="nav-link active">篇章</a>
+      <a href="#bridge" class="nav-link">断桥</a>
+      <a href="#wisdom" class="nav-link">悟道</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero-stage" id="hero">
+    <canvas id="c" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <p class="hero-tag">深度学习寓言</p>
+      <h1 class="hero-title">镜之国的<em>学徒</em></h1>
+      <p class="hero-desc">在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵，踏上了复刻古老技艺的修行。</p>
+      <a href="#chapters" class="hero-cta">开启镜中之旅 →</a>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>向下滚动</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN JOURNEY -->
+  <main>
+
+    <!-- Section Header -->
+    <div class="section-intro" id="chapters">
+      <h2>六重修行：从神谕石到注意力之眼</h2>
+      <p>阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。左侧是镜之国的寓言，右侧是人间的技术。</p>
+    </div>
+
+    <!-- Chapter 1 -->
+    <article class="chapter" data-ch="1">
+      <div class="chapter-tale">
+        <p class="chapter-index">第一篇章</p>
+        <h3>神谕石与失真之雾</h3>
+        <p class="tale-text">阿提收集了成千上万块神谕石——一面刻着问题，一面刻着真实图景。镜子映出的图像与真实之间的差异，如同一层弥漫的失真之雾。贤者说：先把石头洗干净，再分批地、耐心地擦拭镜面。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">神谕石</span><span class="tech-val">标注数据（训练集）。AI 需要大量「问题-答案」配对来学习。</span></div>
+        <div class="tech-item"><span class="tech-key">失真之雾</span><span class="tech-val">损失函数（Loss Function）。衡量预测与真实答案之间的差距。</span></div>
+        <div class="tech-item"><span class="tech-key">分批展示</span><span class="tech-val">Mini-batch 训练。一次用 64 或 128 个样本，平衡算力与泛化。</span></div>
+        <div class="tech-item"><span class="tech-key">清洗石头</span><span class="tech-val">数据预处理。垃圾进，垃圾出，数据质量决定模型上限。</span></div>
+      </aside>
+    </article>
+
+    <!-- Chapter 2 -->
+    <article class="chapter" data-ch="2">
+      <div class="chapter-tale">
+        <p class="chapter-index">第二篇章</p>
+        <h3>微分之风与链式回溯</h3>
+        <p class="tale-text">贤者告诉阿提：「别瞎碰，要感知风。」这风是微分之风——它告诉每一片晶片该往哪个方向转动，才能让雾气变淡。但这风只能从镜面一层一层往回吹，越往深处越微弱。阿提学会了用链式回溯术，让微风从最后一层逐层倒推至第一层。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">微分之风</span><span class="tech-val">梯度（Gradient）。告诉你在当前位置，往哪个方向走损失下降最快。</span></div>
+        <div class="tech-item"><span class="tech-key">链式回溯</span><span class="tech-val">反向传播（Backpropagation）。从输出层往回推，利用链式法则逐层计算。</span></div>
+        <div class="tech-item"><span class="tech-key">逆风而行</span><span class="tech-val">梯度下降（Gradient Descent）。梯度指向损失增长方向，参数更新要反着走。</span></div>
+        <div class="tech-item"><span class="tech-key">步长</span><span class="tech-val">学习率（Learning Rate）。太大震荡不收敛，太小训练太慢。</span></div>
+      </aside>
+    </article>
+
+    <!-- Chapter 3 -->
+    <article class="chapter" data-ch="3">
+      <div class="chapter-tale">
+        <p class="chapter-index">第三篇章</p>
+        <h3>残影之桥与归一光环</h3>
+        <p class="tale-text">当镜子深达百层，微分之风传到深处已如叹息。阿提搭建残影之桥——让信号可以跳过中间层直接跳跃传递。又施加归一光环，将每一层紊乱的气流抚平为同一尺度。从此，百层之镜也能稳定修行。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">梯度消失</span><span class="tech-val">深层网络的梯度逐层衰减，底层参数几乎不更新。</span></div>
+        <div class="tech-item"><span class="tech-key">残影之桥</span><span class="tech-val">残差连接（ResNet）。output = F(x) + x，让网络学习「变化量」而非全部。</span></div>
+        <div class="tech-item"><span class="tech-key">归一光环</span><span class="tech-val">LayerNorm / BatchNorm。稳定每一层的数值分布，加速训练收敛。</span></div>
+      </aside>
+    </article>
+
+    <!-- Chapter 4 -->
+    <article class="chapter" data-ch="4">
+      <div class="chapter-tale">
+        <p class="chapter-index">第四篇章</p>
+        <h3>注意力之眼</h3>
+        <p class="tale-text">镜子读句子时总是顾此失彼——看到句尾就忘了句首的「那个男人」是谁。阿提锻造出三只眼：查询之眼、钥匙之眼与价值之眼。三眼齐睁，镜中每一处都能直接「看见」全文中任何相关的角落，无论距离多远。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">注意力之眼</span><span class="tech-val">自注意力机制（Self-Attention）。每个位置动态关注全序列的所有位置。</span></div>
+        <div class="tech-item"><span class="tech-key">多头注意</span><span class="tech-val">Multi-Head Attention。多组 Q/K/V 并行，捕捉不同关系模式。</span></div>
+        <div class="tech-item"><span class="tech-key">位置印记</span><span class="tech-val">位置编码（Positional Encoding）。弥补注意力本身无顺序概念的缺陷。</span></div>
+        <div class="tech-item"><span class="tech-key">Transformer</span><span class="tech-val">当今大语言模型（GPT、Claude）的基石架构。</span></div>
+      </aside>
+    </article>
+
+    <!-- Chapter 5 -->
+    <article class="chapter" data-ch="5">
+      <div class="chapter-tale">
+        <p class="chapter-index">第五篇章</p>
+        <h3>千面之劫与遗忘沙</h3>
+        <p class="tale-text">镜子能完美复现神谕石上的每一道划痕，却在全新的石头上茫然失措——它把石头特有的噪声也当成了真理。阿提洒下遗忘沙，随机掩去镜中碎片；又修炼早停术，在镜子开始背诵划痕之前果断收手。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">千面之劫</span><span class="tech-val">过拟合（Overfitting）。训练集表现极好，新数据上表现很差。</span></div>
+        <div class="tech-item"><span class="tech-key">遗忘沙</span><span class="tech-val">Dropout。随机「关闭」神经元，强迫网络学习鲁棒特征。</span></div>
+        <div class="tech-item"><span class="tech-key">重量衰减</span><span class="tech-val">L2 正则化。惩罚过大权重，让模型更简单平滑。</span></div>
+        <div class="tech-item"><span class="tech-key">早停术</span><span class="tech-val">Early Stopping。验证集误差不再下降时果断停手。</span></div>
+      </aside>
+    </article>
+
+    <!-- Chapter 6 -->
+    <article class="chapter" data-ch="6">
+      <div class="chapter-tale">
+        <p class="chapter-index">第六篇章</p>
+        <h3>大熔炉与星辰之海</h3>
+        <p class="tale-text">研磨晶片、回溯微风、消化亿万神谕石——这一切需要焚天的能量。阿提来到地心深处，目睹了由 GPU/TPU 构成的星辰阵列：每一颗星都在同时运转，将数月的修行压缩为几个昼夜。</p>
+      </div>
+      <aside class="chapter-tech-side">
+        <h4>▍技术映射</h4>
+        <div class="tech-item"><span class="tech-key">大熔炉</span><span class="tech-val">GPU/TPU 专用算力硬件。深度学习需要海量并行矩阵运算。</span></div>
+        <div class="tech-item"><span class="tech-key">星辰阵列</span><span class="tech-val">分布式训练。数据并行 / 模型并行，多机多卡同步训练。</span></div>
+        <div class="tech-item"><span class="tech-key">数据海洋</span><span class="tech-val">Scaling Law。模型参数与数据量需同步增长才能持续提升。</span></div>
+      </aside>
+    </article>
+
+    <!-- BRIDGE — Synthesis -->
+    <section class="bridge-section" id="bridge">
+      <div class="section-intro">
+        <h2>断桥重铸 · 六重法则</h2>
+        <p>当镜面深处出现断裂，AI 如何修补？不是泥瓦匠的堆砌，而是六维度的补全——每一维度对应一章修行中习得的能力。</p>
+      </div>
+      <div class="bridge-web">
+        <div class="bridge-node">
+          <div class="bridge-num">01</div>
+          <h4>跨岸凝视</h4>
+          <p>注意力机制建立全局关联——左岸的 Query 与右岸的 Key 直接计算亲密分数，跨越断裂的距离。</p>
+        </div>
+        <div class="bridge-node">
+          <div class="bridge-num">02</div>
+          <h4>记忆重塑</h4>
+          <p>预训练先验提供最可能的补全。AI 在亿万神谕石中见过千万座桥，记忆如潮水自动填补中间。</p>
+        </div>
+        <div class="bridge-node">
+          <div class="bridge-num">03</div>
+          <h4>定向生长</h4>
+          <p>梯度下降引导空白参数自发优化。在断裂处放置随机晶片，让微分之风雕塑它们的形态。</p>
+        </div>
+        <div class="bridge-node">
+          <div class="bridge-num">04</div>
+          <h4>旁路保通</h4>
+          <p>残差连接维持信息流通。主桥断裂时，信号通过跳跃连接绕过断层，梯度仍能反向吹拂。</p>
+        </div>
+        <div class="bridge-node">
+          <div class="bridge-num">05</div>
+          <h4>简约约束</h4>
+          <p>正则化迫使最平滑的补全。遗忘沙与重量衰减防止过度修补，让填补处如水面般融入整体。</p>
+        </div>
+        <div class="bridge-node">
+          <div class="bridge-num">06</div>
+          <h4>多头共识</h4>
+          <p>多组注意力之眼同时审视：结构头检查连续性，语义头检查合理性，风格头检查协调性。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="quote-section" id="wisdom">
+      <blockquote>
+        <p class="quote-text">镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越数学、代码和耐心三重迷雾的人，展露真正的光芒。</p>
+        <footer><p class="quote-author">—— 阿提，镜之国贤者</p></footer>
+      </blockquote>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-brand">万象镜</div>
+      <div class="footer-copy">以寓言抵达技术的深处</div>
+    </footer>
+
+  </main>
+
+  <script src="assets/js/wanxiang_mirror.js" defer></script>
+</body>
+</html>
