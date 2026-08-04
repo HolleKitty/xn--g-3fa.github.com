@@ -1,195 +1,1112 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="万象镜 · 镜之国的学徒 — 以寓言抵达深度学习技术的深处。六重修行，从神谕石到注意力之眼。">
-  <meta name="theme-color" content="#070604">
-  <title>万象镜 · 镜之国的学徒</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万象镜 · 镜之国的学徒</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   Design Tokens — taste-editorial + taste-default
+   Type scale: 1.333 Perfetto Fourth — 12/18/24/32/42/56
+   Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64
+   Font weights: 400, 500, 700 (3 max)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Noto Serif SC', 'Songti SC', serif;
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  --color-canvas: #FFFFFF;
+  --color-canvas-warm: #FAF9F6;
+  --color-ink-primary: #1C1E21;
+  --color-ink-secondary: #606770;
+  --color-ink-tertiary: #8A8D91;
+  --color-hairline-soft: rgba(0,0,0,0.06);
 
-  <link rel="stylesheet" href="assets/css/wanxiang_mirror.css">
+  --color-accent: #C9A96E;
+  --color-accent-soft: rgba(201,169,110,0.12);
+
+  --radius-pill: 100px;
+  --radius-xxl: 20px;
+  --radius-xl: 16px;
+
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 12px 32px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Type scale — 1.333 */
+  --text-caption: 12px;
+  --text-label: 14px;
+  --text-body: 18px;
+  --text-h3: 24px;
+  --text-h2: 32px;
+  --text-h1: 42px;
+  --text-display: 56px;
+  --text-colossal: clamp(120px, 18vw, 200px);
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+  --space-5xl: 96px;
+  --space-6xl: 128px;
+
+  /* Vertical rhythm */
+  --body-leading: 1.8;
+  --heading-leading: 1.2;
+  --display-leading: 1.05;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; text-rendering: optimizeLegibility; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--body-leading);
+  background: var(--color-canvas);
+  color: var(--color-ink-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: var(--space-sm); }
+::-webkit-scrollbar-track { background: var(--color-canvas-warm); }
+::-webkit-scrollbar-thumb { background: var(--color-hairline-soft); border-radius: var(--space-xs); }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════ */
+.hero-stage {
+  position: relative;
+  width: 100%; height: 100vh;
+  background: radial-gradient(115% 88% at 50% 8%, #121008, #070604 48%, #020201);
+  overflow: hidden;
+}
+.hero-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.hero-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; z-index: 2;
+  padding: 0 var(--space-xl);
+}
+.hero-eyebrow {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(232,217,160,0.45);
+  margin-bottom: var(--space-lg);
+  opacity: 0; animation: fadeUp 1.2s ease 0.4s forwards;
+}
+.hero-title {
+  font-family: var(--font-serif); font-size: var(--text-display); font-weight: 700;
+  line-height: var(--display-leading); color: #F8F6F0; letter-spacing: 0.05em;
+  margin-bottom: var(--space-xl);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  opacity: 0; animation: fadeUp 1.2s ease 0.6s forwards;
+}
+.hero-title em {
+  font-style: normal; color: #E8D5A3; font-weight: 800;
+}
+.hero-desc {
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  color: rgba(200,190,170,0.65); max-width: 600px; line-height: var(--body-leading);
+  margin-bottom: var(--space-2xl);
+  opacity: 0; animation: fadeUp 1.2s ease 0.8s forwards;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-pill);
+  background: var(--color-canvas); color: var(--color-ink-primary);
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 500;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: var(--transition-smooth); border: none; cursor: pointer;
+  opacity: 0; animation: fadeUp 1.2s ease 1.0s forwards;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.hero-cta:active { transform: scale(0.98); }
+
+.hero-scroll {
+  position: absolute; bottom: var(--space-3xl); left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
+  opacity: 0; animation: fadeUp 1.2s ease 1.3s forwards;
+}
+.hero-scroll span {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.2em; color: rgba(200,190,170,0.35); text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 1px; height: var(--space-3xl);
+  background: linear-gradient(to bottom, rgba(201,169,110,0.25), transparent);
+  animation: scrollLine 2.5s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(var(--space-xl)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  50.1%{ transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+.nav-wrap {
+  position: fixed; top: var(--space-xl); left: 50%; transform: translateX(-50%);
+  z-index: 1000; transition: var(--transition-smooth);
+}
+.nav-pill {
+  display: flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--color-hairline-soft);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: var(--transition-smooth);
+}
+.nav-pill.on-dark {
+  background: rgba(20,20,20,0.55);
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.nav-pill.on-dark .nav-logo { opacity: 0.9; }
+.nav-pill.on-dark .nav-link { color: rgba(255,255,255,0.55); }
+.nav-pill.on-dark .nav-link:hover { color: #E8D5A3; background: rgba(255,255,255,0.06); }
+.nav-pill.on-dark .nav-link.active { color: #E8D5A3; background: rgba(255,255,255,0.08); }
+
+.nav-logo {
+  display: flex; align-items: center;
+  text-decoration: none; padding: 2px var(--space-sm); margin-right: var(--space-sm);
+  transition: opacity 0.3s ease;
+}
+.nav-logo-img { height: 26px; width: auto; display: block; }
+.nav-link {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  color: var(--color-ink-secondary); text-decoration: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  transition: var(--transition-smooth); cursor: pointer; border: none; background: none;
+  letter-spacing: 0.02em;
+}
+.nav-link:hover { background: var(--color-accent-soft); color: var(--color-ink-primary); }
+.nav-link.active { background: var(--color-ink-primary); color: var(--color-canvas); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTENT WRAPPER
+   ═══════════════════════════════════════════════════════════════ */
+.content-wrap { position: relative; z-index: 2; background: var(--color-canvas); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PROLOGUE — section header
+   ═══════════════════════════════════════════════════════════════ */
+.prologue {
+  max-width: 800px; margin: 0 auto;
+  padding: var(--space-6xl) var(--space-xl) var(--space-4xl);
+  text-align: center;
+}
+.prologue-eyebrow {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--color-accent); margin-bottom: var(--space-lg);
+}
+.prologue-title {
+  font-family: var(--font-serif); font-size: var(--text-h1); font-weight: 700;
+  line-height: var(--heading-leading); color: var(--color-ink-primary);
+  margin-bottom: var(--space-xl);
+}
+.prologue-desc {
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  color: var(--color-ink-secondary); max-width: 560px; margin: 0 auto;
+  line-height: var(--body-leading);
+}
+/* ornamental divider */
+.prologue::after {
+  content: '';
+  display: block; width: 48px; height: 1px;
+  background: var(--color-accent); opacity: 0.4;
+  margin: var(--space-3xl) auto 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHAPTER — full-width narrative block
+   ═══════════════════════════════════════════════════════════════ */
+.chapter {
+  display: grid;
+  grid-template-columns: 1fr 680px 1fr;
+  padding: var(--space-6xl) var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+.chapter:nth-child(even) { background: var(--color-canvas-warm); }
+
+/* Chapter number — colossal ornamental numeral */
+.chapter-numeral {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  font-family: var(--font-serif); font-size: var(--text-colossal); font-weight: 700;
+  color: var(--color-accent); opacity: 0.08;
+  line-height: 0.75;
+  align-self: start; justify-self: end;
+  margin-right: var(--space-3xl);
+  margin-top: -0.12em;
+  pointer-events: none; user-select: none;
+}
+/* Even chapters: numeral on right */
+.chapter:nth-child(even) .chapter-numeral {
+  grid-column: 3;
+  justify-self: start;
+  margin-right: 0; margin-left: var(--space-3xl);
+}
+
+.chapter-body {
+  grid-column: 2;
+  position: relative; z-index: 1;
+}
+
+.chapter-label {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--color-accent); margin-bottom: var(--space-sm);
+}
+.chapter-title {
+  font-family: var(--font-serif); font-size: var(--text-h1); font-weight: 700;
+  line-height: var(--heading-leading); color: var(--color-ink-primary);
+  margin-bottom: var(--space-lg);
+}
+.chapter-story {
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  color: var(--color-ink-secondary); line-height: var(--body-leading);
+  max-width: 600px; margin-bottom: var(--space-3xl);
+}
+
+/* ─── Tech Key — visible annotation boxes ─── */
+.tech-key {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md);
+  max-width: 640px;
+}
+.tech-item {
+  display: flex; gap: var(--space-md); align-items: flex-start;
+  padding: var(--space-lg); border-radius: var(--radius-xl);
+  background: var(--color-canvas);
+  transition: background 0.3s ease;
+}
+.chapter:nth-child(even) .tech-item { background: #F3F2EF; }
+
+.tech-symbol {
+  flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--color-accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans); font-size: var(--text-label); font-weight: 700;
+  color: var(--color-accent);
+}
+.tech-text { font-family: var(--font-sans); font-size: var(--text-label); line-height: 1.6; }
+.tech-text strong { color: var(--color-ink-primary); font-weight: 500; display: block; margin-bottom: 2px; }
+.tech-text span { color: var(--color-ink-tertiary); font-size: var(--text-caption); }
+
+@media (max-width: 768px) {
+  .chapter { grid-template-columns: 1fr; padding: var(--space-4xl) var(--space-xl); }
+  .chapter-numeral { display: none; }
+  .chapter-body { grid-column: 1; }
+  .tech-key { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .chapter-numeral { font-size: clamp(80px, 14vw, 140px); margin-right: var(--space-xl); }
+  .chapter:nth-child(even) .chapter-numeral { margin-left: var(--space-xl); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INTERLUDE — Bridge section
+   ═══════════════════════════════════════════════════════════════ */
+.interlude-header {
+  max-width: 800px; margin: 0 auto;
+  padding: var(--space-6xl) var(--space-xl) var(--space-4xl);
+  text-align: center;
+}
+.interlude-eyebrow {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--color-accent); margin-bottom: var(--space-lg);
+}
+.interlude-title {
+  font-family: var(--font-serif); font-size: var(--text-h1); font-weight: 700;
+  line-height: var(--heading-leading); color: var(--color-ink-primary);
+  margin-bottom: var(--space-xl);
+}
+.interlude-desc {
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  color: var(--color-ink-secondary); max-width: 560px; margin: 0 auto;
+  line-height: var(--body-leading);
+}
+.interlude-header::after {
+  content: '';
+  display: block; width: 48px; height: 1px;
+  background: var(--color-accent); opacity: 0.4;
+  margin: var(--space-3xl) auto 0;
+}
+
+.bridge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 var(--space-xl) var(--space-6xl);
+}
+.bridge-card {
+  position: relative;
+  background: var(--color-canvas-warm);
+  border-radius: var(--radius-xxl);
+  padding: var(--space-2xl);
+  transition: background 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.bridge-card:hover {
+  background: var(--color-canvas);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+.bridge-num {
+  font-family: var(--font-sans); font-size: var(--text-h1); font-weight: 700;
+  color: var(--color-accent); opacity: 0.2; line-height: 1;
+  margin-bottom: var(--space-lg);
+}
+.bridge-card h4 {
+  font-family: var(--font-serif); font-size: var(--text-h3); font-weight: 700;
+  color: var(--color-ink-primary); margin-bottom: var(--space-sm);
+  line-height: var(--heading-leading);
+}
+.bridge-card p {
+  font-family: var(--font-sans); font-size: var(--text-body); font-weight: 400;
+  color: var(--color-ink-secondary); line-height: var(--body-leading);
+}
+
+@media (max-width: 768px) {
+  .bridge-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CODA — Quote
+   ═══════════════════════════════════════════════════════════════ */
+.coda {
+  text-align: center;
+  padding: var(--space-6xl) var(--space-xl);
+  background: linear-gradient(180deg, var(--color-canvas), var(--color-canvas-warm), var(--color-canvas));
+  position: relative;
+}
+
+/* ornamental ring above quote */
+.coda::before {
+  content: '';
+  display: block;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.2);
+  margin: 0 auto var(--space-3xl);
+}
+
+.coda-text {
+  font-family: var(--font-serif); font-size: var(--text-h2); font-weight: 400;
+  font-style: italic; line-height: 1.7;
+  color: var(--color-ink-primary); max-width: 640px;
+  margin: 0 auto var(--space-2xl);
+}
+.coda-text em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+.coda-author {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  border-top: 1px solid var(--color-hairline-soft);
+}
+.footer-brand {
+  font-family: var(--font-serif); font-size: var(--text-h3); font-weight: 700;
+  color: var(--color-ink-primary); letter-spacing: 0.15em; margin-bottom: var(--space-sm);
+}
+.footer-copy {
+  font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 400;
+  color: var(--color-ink-tertiary); letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REVEAL ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger children within .stagger-container */
+.stagger-container .reveal { transition-delay: 0s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --text-display: 40px;
+    --text-h1: 32px;
+    --text-h2: 24px;
+    --text-h3: 20px;
+    --text-body: 16px;
+    --body-leading: 1.7;
+  }
+  .prologue { padding: var(--space-5xl) var(--space-xl) var(--space-3xl); }
+  .chapter { padding: var(--space-4xl) var(--space-xl); }
+  .interlude-header { padding: var(--space-5xl) var(--space-xl) var(--space-3xl); }
+  .bridge-grid { padding-bottom: var(--space-4xl); }
+}
+</style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="nav-wrap" aria-label="主导航">
-    <div class="nav-pill on-dark" id="navbar">
-      <a href="#" class="nav-logo" aria-label="万象镜 · 回到顶部">
-        <img src="assets/img/logo.png" alt="万象镜" class="nav-logo-img">
-      </a>
-      <a href="#chapters" class="nav-link active">篇章</a>
-      <a href="#bridge" class="nav-link">断桥</a>
-      <a href="#wisdom" class="nav-link">悟道</a>
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="nav-wrap">
+  <div class="nav-pill on-dark" id="navbar">
+    <a href="#" class="nav-logo" aria-label="万象镜 · 回到顶部"><img src="assets/img/logo.png" alt="万象镜" class="nav-logo-img"></a>
+    <a href="#chapters" class="nav-link active">篇章</a>
+    <a href="#bridge" class="nav-link">断桥</a>
+    <a href="#wisdom" class="nav-link">悟道</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="hero-stage" id="hero">
+  <canvas id="c"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">深度学习寓言</p>
+    <h1 class="hero-title">镜之国的<em>学徒</em></h1>
+    <p class="hero-desc">在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵、注意之眼为灯，踏上了一场穿越数据迷雾、探寻镜中真相的修行。这不是神话，这是每一个深度学习模型被训练出来的故事。</p>
+    <a href="#chapters" class="hero-cta">开启镜中之旅 →</a>
+    <div class="hero-scroll">
+      <span>向下滚动</span>
+      <div class="hero-scroll-line"></div>
     </div>
-  </nav>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <header class="hero-stage" id="hero">
-    <canvas id="c" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <p class="hero-tag">深度学习寓言</p>
-      <h1 class="hero-title">镜之国的<em>学徒</em></h1>
-      <p class="hero-desc">在数字大陆的尽头，有一面蒙尘的万象镜。一位名叫阿提的学徒，以神谕石为引、微分之风为舵，踏上了复刻古老技艺的修行。</p>
-      <a href="#chapters" class="hero-cta">开启镜中之旅 →</a>
-      <div class="hero-scroll" aria-hidden="true">
-        <span>向下滚动</span>
-        <div class="hero-scroll-line"></div>
+<!-- ═══════════════════════════════════════════════════════════════
+     PROLOGUE
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="content-wrap" id="chapters">
+<div class="prologue reveal">
+  <p class="prologue-eyebrow">六重修行</p>
+  <h2 class="prologue-title">从神谕石到注意力之眼</h2>
+  <p class="prologue-desc">阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。寓言是入口，技术是真相。六重篇章，从数据收集到模型训练，从网络结构到正则化技巧，最终抵达支撑一切的硬件熔炉——这是一条所有深度学习从业者都曾走过的路。</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 1 — 神谕石与失真之雾
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">壹</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第一篇章</p>
+    <h3 class="chapter-title reveal">神谕石与失真之雾</h3>
+    <p class="chapter-story reveal">一切从<span>神谕石</span>开始。在镜之国的荒野中，散落着无数这样的石头——每一块的一面刻着模糊的图景，另一面则是对应的真相。阿提的任务看似简单：将石头举到镜前，让镜子学会从模糊映射到清晰。然而，镜子最初映出的画面与真相之间，永远隔着一层<span>失真之雾</span>。这雾时浓时淡，浓时意味着镜像与真实的差距巨大，淡时则近乎吻合。阿提很快明白了一个朴素的真理：石头必须先洗净——去除残缺的、纠正错误的、统一大小和色泽——否则镜子学到的一切都将建立在流沙之上。他开始将石头<span>分批展示</span>：每次只取一小把，64 块或 128 块，让镜子在每一批上仔细揣摩，而不至于被全部石头的浩瀚所淹没。这些机械而枯燥的工序——采集、清洗、分批——恰是整场修行中最不可逾越的根基。没有好的神谕石，就没有后来的万象镜。</p>
+
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>神谕石</strong><span>标注数据（训练集）。每条数据包含输入（问题）和标签（答案），AI 从这些配对中学习映射规律。数据量、多样性和标注质量直接决定了模型的能力上限——再好的算法也无法弥补劣质数据的缺陷。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>失真之雾</strong><span>损失函数（Loss Function）。用数学公式量化"预测值"与"真实值"之间的差距。常见的如均方误差（MSE）用于回归、交叉熵（Cross-Entropy）用于分类。损失值越大，模型表现越差——训练的目标就是让损失不断减小。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>分批展示</strong><span>Mini-batch 训练。每次取一小批样本（通常 32/64/128 个）计算梯度并更新参数。既避免了单样本训练的震荡，又比全量数据训练更节省显存，是深度学习中最基础的训练策略之一。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>清洗石头</strong><span>数据预处理。包括缺失值填充、异常值剔除、标准化/归一化、数据增强（翻转、裁剪、加噪）等。现实中的原始数据总是脏的——清洗质量决定模型学习的天花板，"垃圾进，垃圾出"是 AI 领域的第一定律。</span></div>
       </div>
     </div>
-  </header>
+  </div>
+</div>
 
-  <main>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 2 — 微分之风与链式回溯
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">贰</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第二篇章</p>
+    <h3 class="chapter-title reveal">微分之风与链式回溯</h3>
+    <p class="chapter-story reveal">掌握了神谕石的采集与清洗之后，贤者给了阿提一个看似玄妙的指示：「别瞎碰，要<span>感知风</span>。」阿提闭上眼，将手掌悬在镜面上方。起初他什么也感觉不到，直到贤者让他每次只微微转动一片晶片，观察雾气的变化。渐渐地，他感受到了一股无形的力场——<span>微分之风</span>。这片镜面上每一个位置的每一片晶片，风都在告诉它：往这个方向转动，雾气会变淡；往那个方向转动，雾气会变浓。更神奇的是<span>链式回溯术</span>：镜面深处的晶片也会影响最终的雾气，但这种影响不是直接的——风从镜面最外层开始，利用链式法则，一层一层向深处倒推，让最底层的晶片也知晓自己该如何调整。<span>逆风而行</span>是阿提学到的第二条铁律：风指向雾气最浓的方向，而他要做的，恰恰是逆着风向迈出一步。这一步的大小——<span>步长</span>——至关重要：太大，他会越过最低点，在雾谷两端来回震荡；太小，修行将永无止境。</p>
 
-    <div class="section-intro" id="chapters">
-      <h2>六重修行：从神谕石到注意力之眼</h2>
-      <p>阿提的每一步修行，都对应着深度学习底层技术中不可绕过的核心原理。左侧是镜之国的寓言，右侧是人间的技术。</p>
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>微分之风</strong><span>梯度（Gradient）。损失函数对每个参数求偏导数，得到一个向量——梯度。它指向损失增长最快的方向。梯度的大小反映了该位置损失变化的陡峭程度，是参数更新的核心依据。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>链式回溯</strong><span>反向传播（Backpropagation）。利用链式法则从输出层向输入层逐层计算梯度。每一层的梯度 = 后一层传来的梯度 × 本层激活函数的导数 × 本层的权重。这是训练一切深度神经网络的核心算法。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>逆风而行</strong><span>梯度下降（Gradient Descent）。参数更新方向 = 负梯度方向。因为梯度指向损失上升最快的方向，所以参数要向相反方向移动才能使损失减小。这是深度学习优化的最基本思想。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>步长</strong><span>学习率（Learning Rate）。控制每次参数更新的幅度。太大容易震荡甚至发散（损失不降反升），太小则收敛极慢。实际训练中常用学习率衰减策略：前期大步快走，后期小步精调。</span></div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <article class="chapter" data-ch="1">
-      <div class="chapter-tale">
-        <p class="chapter-index">第一篇章</p>
-        <h3>神谕石与失真之雾</h3>
-        <p class="tale-text">阿提收集了成千上万块神谕石——一面刻着问题，一面刻着真实图景。镜子映出的图像与真实之间的差异，如同一层弥漫的失真之雾。贤者说：先把石头洗干净，再分批地、耐心地擦拭镜面。</p>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 3 — 残影之桥与归一光环
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">叁</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第三篇章</p>
+    <h3 class="chapter-title reveal">残影之桥与归一光环</h3>
+    <p class="chapter-story reveal">阿提开始堆叠越来越多的晶片层——十层、五十层、一百层。他很快遇到了一个诡异的现象：微分之风在表层劲吹，但越往镜面深处，风声越微弱。传到第五十层时已如蚊蚋振翅，到了第一百层，几乎什么都感觉不到了。这便是修行者最畏惧的<span>梯度消失</span>——深处的晶片收不到任何指引，如同沉入海底的石头，再也不曾移动。阿提在贤者的指点下搭建了<span>残影之桥</span>：与其让信号必须一层一层艰难地穿过全部晶片，不如在每隔几层之间架起一道跳跃之桥。信号可以从桥面直接跨过，不必从头走到尾——只要学会桥两端之间的"变化量"即可。与此同时，阿提为每一层施加了<span>归一光环</span>：将紊乱的气流抚平到同一尺度——均值为零，方差为一——然后让晶片自行学习何时需要打破这种归一。从此，百层之镜也能稳定修行，而不再是越深越死的绝境。</p>
+
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>残影之桥</strong><span>残差连接（Residual Connection）。核心公式：output = F(x) + x。网络不再被迫学习完整的输出，只需学习"相对于输入的改变量"。梯度可以通过恒等映射路径直接流向浅层，从根本上缓解了梯度消失问题。ResNet 凭此获得了 2015 年 ImageNet 冠军，并开启了百层以上的深层网络时代。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">神谕石</span><span class="tech-val">标注数据（训练集）。AI 需要大量「问题-答案」配对来学习。</span></div>
-        <div class="tech-item"><span class="tech-key">失真之雾</span><span class="tech-val">损失函数（Loss Function）。衡量预测与真实答案之间的差距。</span></div>
-        <div class="tech-item"><span class="tech-key">分批展示</span><span class="tech-val">Mini-batch 训练。一次用 64 或 128 个样本，平衡算力与泛化。</span></div>
-        <div class="tech-item"><span class="tech-key">清洗石头</span><span class="tech-val">数据预处理。垃圾进，垃圾出，数据质量决定模型上限。</span></div>
-      </aside>
-    </article>
-
-    <article class="chapter" data-ch="2">
-      <div class="chapter-tale">
-        <p class="chapter-index">第二篇章</p>
-        <h3>微分之风与链式回溯</h3>
-        <p class="tale-text">贤者告诉阿提：「别瞎碰，要感知风。」这风是微分之风——它告诉每一片晶片该往哪个方向转动，才能让雾气变淡。但这风只能从镜面一层一层往回吹，越往深处越微弱。阿提学会了用链式回溯术，让微风从最后一层逐层倒推至第一层。</p>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>归一光环</strong><span>LayerNorm / BatchNorm。BatchNorm 对一个 mini-batch 内的同一特征维度进行标准化；LayerNorm 对单个样本的所有特征维度进行标准化。两者都使每一层的输入分布保持稳定，允许使用更大的学习率，大幅加速训练收敛。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">微分之风</span><span class="tech-val">梯度（Gradient）。告诉你在当前位置，往哪个方向走损失下降最快。</span></div>
-        <div class="tech-item"><span class="tech-key">链式回溯</span><span class="tech-val">反向传播（Backpropagation）。从输出层往回推，利用链式法则逐层计算。</span></div>
-        <div class="tech-item"><span class="tech-key">逆风而行</span><span class="tech-val">梯度下降（Gradient Descent）。梯度指向损失增长方向，参数更新要反着走。</span></div>
-        <div class="tech-item"><span class="tech-key">步长</span><span class="tech-val">学习率（Learning Rate）。太大震荡不收敛，太小训练太慢。</span></div>
-      </aside>
-    </article>
-
-    <article class="chapter" data-ch="3">
-      <div class="chapter-tale">
-        <p class="chapter-index">第三篇章</p>
-        <h3>残影之桥与归一光环</h3>
-        <p class="tale-text">当镜子深达百层，微分之风传到深处已如叹息。阿提搭建残影之桥——让信号可以跳过中间层直接跳跃传递。又施加归一光环，将每一层紊乱的气流抚平为同一尺度。从此，百层之镜也能稳定修行。</p>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>梯度消失</strong><span>当网络层数过深时，链式法则中反复乘以小于 1 的导数（如 sigmoid 梯度最大仅 0.25），导致浅层的梯度趋近于零。浅层参数几乎不更新——这就是梯度消失。残差连接和 ReLU 激活函数是应对它的两大武器。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">梯度消失</span><span class="tech-val">深层网络的梯度逐层衰减，底层参数几乎不更新。</span></div>
-        <div class="tech-item"><span class="tech-key">残影之桥</span><span class="tech-val">残差连接（ResNet）。output = F(x) + x，让网络学习「变化量」而非全部。</span></div>
-        <div class="tech-item"><span class="tech-key">归一光环</span><span class="tech-val">LayerNorm / BatchNorm。稳定每一层的数值分布，加速训练收敛。</span></div>
-      </aside>
-    </article>
-
-    <article class="chapter" data-ch="4">
-      <div class="chapter-tale">
-        <p class="chapter-index">第四篇章</p>
-        <h3>注意力之眼</h3>
-        <p class="tale-text">镜子读句子时总是顾此失彼——看到句尾就忘了句首的「那个男人」是谁。阿提锻造出三只眼：查询之眼、钥匙之眼与价值之眼。三眼齐睁，镜中每一处都能直接「看见」全文中任何相关的角落，无论距离多远。</p>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>稳定分布</strong><span>归一化使激活值的分布保持稳定，避免了"内部协变量偏移"——即每一层输入分布随训练不断变化导致的训练不稳定。实践中，使用 BatchNorm 的网络通常可以将学习率提高 10 倍以上，训练时间缩短为原来的 1/5 甚至更少。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">注意力之眼</span><span class="tech-val">自注意力机制（Self-Attention）。每个位置动态关注全序列的所有位置。</span></div>
-        <div class="tech-item"><span class="tech-key">多头注意</span><span class="tech-val">Multi-Head Attention。多组 Q/K/V 并行，捕捉不同关系模式。</span></div>
-        <div class="tech-item"><span class="tech-key">位置印记</span><span class="tech-val">位置编码（Positional Encoding）。弥补注意力本身无顺序概念的缺陷。</span></div>
-        <div class="tech-item"><span class="tech-key">Transformer</span><span class="tech-val">当今大语言模型（GPT、Claude）的基石架构。</span></div>
-      </aside>
-    </article>
+    </div>
+  </div>
+</div>
 
-    <article class="chapter" data-ch="5">
-      <div class="chapter-tale">
-        <p class="chapter-index">第五篇章</p>
-        <h3>千面之劫与遗忘沙</h3>
-        <p class="tale-text">镜子能完美复现神谕石上的每一道划痕，却在全新的石头上茫然失措——它把石头特有的噪声也当成了真理。阿提洒下遗忘沙，随机掩去镜中碎片；又修炼早停术，在镜子开始背诵划痕之前果断收手。</p>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 4 — 注意力之眼
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">肆</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第四篇章</p>
+    <h3 class="chapter-title reveal">注意力之眼</h3>
+    <p class="chapter-story reveal">镜子能看清单个字词，却始终无法理解整句话的含义——尤其是当关键信息相隔甚远时。读到句尾的「他」，镜面早已忘记句首的「那个男人」。无论残影之桥怎么跳跃，信息传递的路径终究是有距离的。直到阿提锻造出了<span>注意力之眼</span>：他不再让镜子逐字逐句地线性阅读，而是在镜面的每一个位置，都让它能够直接"看见"句子中所有其他位置的每一个词。<span>查询之眼</span>负责发出疑问：「我这里需要什么信息？」<span>钥匙之眼</span>负责在每一个位置打上标签：「我这里有这些内容。」<span>价值之眼</span>则承载着每个位置真正的语义内容。查询与钥匙的匹配程度决定了注意力该放在哪里——匹配度越高，价值被提取的权重就越大。三重注视交织，让万象镜拥有了跨越整段文字、在任意距离之间精准关联语义的能力。更精妙的是，阿提锻造了不止一组眼——<span>多头注意力</span>让镜中同时存在八组甚至更多的"关注视角"，有的关注语法结构，有的关注语义关联，有的关注位置关系。只是，注意力的本质是无序的——「A 关注 B」与「B 在 A 前面」是不一样的信息。于是阿提在每块晶石上刻下了<span>位置印记</span>，用正弦和余弦的波动为每个位置嵌入了独一无二的坐标。这一切的最终造物，便是<span>Transformer</span>——如今驱动着 GPT、Claude 等一切大语言模型的基石架构。</p>
+
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>注意力之眼</strong><span>自注意力机制（Self-Attention）。对于序列中的每个位置，计算它与其他所有位置的关联权重，加权聚合信息。公式：Attention(Q,K,V) = softmax(QK^T/√d_k) × V。时间复杂度 O(n²)，但实现了任意距离间的直接信息交互。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">千面之劫</span><span class="tech-val">过拟合（Overfitting）。训练集表现极好，新数据上表现很差。</span></div>
-        <div class="tech-item"><span class="tech-key">遗忘沙</span><span class="tech-val">Dropout。随机「关闭」神经元，强迫网络学习鲁棒特征。</span></div>
-        <div class="tech-item"><span class="tech-key">重量衰减</span><span class="tech-val">L2 正则化。惩罚过大权重，让模型更简单平滑。</span></div>
-        <div class="tech-item"><span class="tech-key">早停术</span><span class="tech-val">Early Stopping。验证集误差不再下降时果断停手。</span></div>
-      </aside>
-    </article>
-
-    <article class="chapter" data-ch="6">
-      <div class="chapter-tale">
-        <p class="chapter-index">第六篇章</p>
-        <h3>大熔炉与星辰之海</h3>
-        <p class="tale-text">研磨晶片、回溯微风、消化亿万神谕石——这一切需要焚天的能量。阿提来到地心深处，目睹了由 GPU/TPU 构成的星辰阵列：每一颗星都在同时运转，将数月的修行压缩为几个昼夜。</p>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>多头注意力</strong><span>Multi-Head Attention。并行运行多组独立的 Q/K/V 线性投影和注意力计算，每组（每个"头"）可以学习关注不同的关系模式——语法头、语义头、距离头等。各头的输出拼接后线性变换，融合多重视角。</span></div>
       </div>
-      <aside class="chapter-tech-side">
-        <h4>▍技术映射</h4>
-        <div class="tech-item"><span class="tech-key">大熔炉</span><span class="tech-val">GPU/TPU 专用算力硬件。深度学习需要海量并行矩阵运算。</span></div>
-        <div class="tech-item"><span class="tech-key">星辰阵列</span><span class="tech-val">分布式训练。数据并行 / 模型并行，多机多卡同步训练。</span></div>
-        <div class="tech-item"><span class="tech-key">数据海洋</span><span class="tech-val">Scaling Law。模型参数与数据量需同步增长才能持续提升。</span></div>
-      </aside>
-    </article>
-
-    <section class="bridge-section" id="bridge">
-      <div class="section-intro">
-        <h2>断桥重铸 · 六重法则</h2>
-        <p>当镜面深处出现断裂，AI 如何修补？不是泥瓦匠的堆砌，而是六维度的补全——每一维度对应一章修行中习得的能力。</p>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>位置印记</strong><span>位置编码（Positional Encoding）。注意力机制本身不感知顺序——"猫追狗"和"狗追猫"在它眼中是相同的词集合。位置编码为每个 token 注入位置信息。原版 Transformer 使用正弦/余弦函数编码，后来的模型（如 GPT）使用可学习的位置嵌入。</span></div>
       </div>
-      <div class="bridge-web">
-        <div class="bridge-node">
-          <div class="bridge-num">01</div>
-          <h4>跨岸凝视</h4>
-          <p>注意力机制建立全局关联——左岸的 Query 与右岸的 Key 直接计算亲密分数，跨越断裂的距离。</p>
-        </div>
-        <div class="bridge-node">
-          <div class="bridge-num">02</div>
-          <h4>记忆重塑</h4>
-          <p>预训练先验提供最可能的补全。AI 在亿万神谕石中见过千万座桥，记忆如潮水自动填补中间。</p>
-        </div>
-        <div class="bridge-node">
-          <div class="bridge-num">03</div>
-          <h4>定向生长</h4>
-          <p>梯度下降引导空白参数自发优化。在断裂处放置随机晶片，让微分之风雕塑它们的形态。</p>
-        </div>
-        <div class="bridge-node">
-          <div class="bridge-num">04</div>
-          <h4>旁路保通</h4>
-          <p>残差连接维持信息流通。主桥断裂时，信号通过跳跃连接绕过断层，梯度仍能反向吹拂。</p>
-        </div>
-        <div class="bridge-node">
-          <div class="bridge-num">05</div>
-          <h4>简约约束</h4>
-          <p>正则化迫使最平滑的补全。遗忘沙与重量衰减防止过度修补，让填补处如水面般融入整体。</p>
-        </div>
-        <div class="bridge-node">
-          <div class="bridge-num">06</div>
-          <h4>多头共识</h4>
-          <p>多组注意力之眼同时审视：结构头检查连续性，语义头检查合理性，风格头检查协调性。</p>
-        </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>Transformer</strong><span>2017 年由 Google 在《Attention Is All You Need》中提出。完全基于注意力机制，抛弃了 RNN/LSTM 的循环结构，实现了高度并行化的训练。GPT（生成式预训练）、Claude、BERT 等所有现代大语言模型均基于此架构，是过去十年 AI 领域最具影响力的发明之一。</span></div>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
 
-    <section class="quote-section" id="wisdom">
-      <blockquote>
-        <p class="quote-text">镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越数学、代码和耐心三重迷雾的人，展露真正的光芒。</p>
-        <footer><p class="quote-author">—— 阿提，镜之国贤者</p></footer>
-      </blockquote>
-    </section>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 5 — 千面之劫与遗忘沙
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">伍</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第五篇章</p>
+    <h3 class="chapter-title reveal">千面之劫与遗忘沙</h3>
+    <p class="chapter-story reveal">修行日渐深入，阿提发现了一件可怕的事：镜子能完美复现神谕石上的每一道细微划痕——甚至包括那些本不该被复现的随机纹路。但当他把一块全新的、从未见过的石头放到镜前时，镜子却茫然失措——它把训练石头的特有噪声当成了真理，失去了泛化到新石头的灵性。这便是修行途中最阴险的陷阱——<span>千面之劫</span>。阿提没有坐以待毙。他从古老的炼金术中学到了三种对抗劫难的法门：一是<span>遗忘沙</span>——每次修行时，他随机撒下一把细沙，暂时掩去一部分晶片。这一轮被掩去的晶片无法参与，迫使旁边的晶片学会独立承担任务。下一轮，沙落在别处，又有另一批晶片接受了淬炼。久而久之，镜中不再有任何一块晶片是不可替代的，每一片都学会了鲁棒的、不依赖同伴的通用特征。二是<span>重量衰减</span>——他给每一片晶片施加了一道无形的约束：你每一次的转动都需要付出代价，转得越夸张，代价越高。这让镜面偏好于"用尽量小的力量来完成尽量好的映射"，而非诉诸于极端的、只为拟合特定划痕而存在的参数。三是<span>早停术</span>——他在修行过程中留出了一批从未用于训练的神谕石，专门用于验证。当验证石上的失真之雾不再下降、甚至开始回升时，他果断停手。过犹不及，再练下去只是在背诵划痕，而非参悟镜之本真。</p>
 
-    <footer class="footer">
-      <div class="footer-brand">万象镜</div>
-      <div class="footer-copy">以寓言抵达技术的深处</div>
-    </footer>
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>千面之劫</strong><span>过拟合（Overfitting）。模型在训练集上表现极好（甚至达到 100% 准确率），但测试集表现远差于训练集。本质是模型记下了训练数据中的噪声和特例，而未能学到真正可泛化的规律。验证集与训练集的性能差距是诊断过拟合的核心指标。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>遗忘沙</strong><span>Dropout。训练时以概率 p（通常 0.2-0.5）随机将神经元输出置零，相当于每次迭代都在训练一个不同的子网络。推理时关闭 Dropout，对所有神经元取平均。这迫使每个神经元都学习到不依赖特定同伴的鲁棒特征，是深度学习中应用最广的正则化技术之一。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>重量衰减</strong><span>L2 正则化 / Weight Decay。在损失函数中加入权重平方和的惩罚项：Loss_total = Loss_original + λ × Σ(w²)。这使得优化器在降低原始损失的同时，也倾向于选择较小的权重值——小权重意味着模型更简单、更平滑，泛化能力更强。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>早停术</strong><span>Early Stopping。将数据分为训练集和验证集，训练过程中持续监控验证集上的损失。当验证损失停止下降并开始回升（即出现过拟合迹象）时立即停止训练，保存验证损失最低时的模型参数。简单、有效、几乎无额外计算成本。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  </main>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 6 — 大熔炉与星辰之海
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-numeral">陆</div>
+  <div class="chapter-body">
+    <p class="chapter-label reveal">第六篇章</p>
+    <h3 class="chapter-title reveal">大熔炉与星辰之海</h3>
+    <p class="chapter-story reveal">六重修行已近终点，但还差最后一步。研磨晶片、回溯微分之风、消化亿万块神谕石——这一切需要的不是技巧，而是焚天的能量。一张普通的桌面晶片板（CPU）每次只能算寥寥几道算式，犹如在沙滩上用手指写字。而一面真正的万象镜需要的运算是海量的矩阵乘法——数以亿计的晶片同时转动、成千上万的微风同时吹拂、一场排山倒海的数值洪流。阿提在贤者的引领下来到地心深处，终于目睹了<span>大熔炉</span>的真面目：数以万计的 GPU 和 TPU 星辰阵列，每一颗星内部都包含数千个计算核心。它们不是一颗一颗地算，而是一排一排、一列一列地并行吞吐。这便是"星辰阵列"的由来——当一面镜子大到任何单一熔炉都容纳不下时，就把镜子切成碎片分给数千颗星辰同时训练，每颗星定期同步彼此的修行成果。更令人敬畏的是<span>数据海洋</span>：贤者告诉阿提，更大的镜子需要更多的神谕石来滋养，而更多的神谕石又反过来要求镜子变得更大。模型参数与数据量之间存在精确的幂律关系——这就是 Scaling Law，一盏照亮整个星辰之海的航标灯。在这场无止境的扩展中，一切最终归于<span>矩阵运算</span>——深度学习世界最原始的呼吸，每一口都是矩阵乘法的火焰。</p>
 
-  <script src="assets/js/wanxiang_mirror.js" defer></script>
+    <div class="tech-key">
+      <div class="tech-item reveal">
+        <div class="tech-symbol">①</div>
+        <div class="tech-text"><strong>大熔炉</strong><span>GPU（图形处理器）包含数千个计算核心，专为并行矩阵运算设计。TPU（张量处理器）是 Google 为深度学习定制的 ASIC 芯片，在矩阵乘法上有极高的吞吐量。相比 CPU 的几十个核心，GPU 的上万个核心使深度学习训练速度提升了数十到数百倍。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">②</div>
+        <div class="tech-text"><strong>星辰阵列</strong><span>分布式训练。数据并行：每张 GPU 持有一份完整模型副本，处理不同的数据子集，定期同步梯度（All-Reduce）。模型并行：模型太大无法放入单张 GPU 时，将不同层或同一层的不同部分拆分到多张卡上。实践中常结合两者——例如 GPT-4 使用数万张 GPU 训练数月。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">③</div>
+        <div class="tech-text"><strong>数据海洋</strong><span>Scaling Law（扩展定律）。OpenAI 等机构的研究发现：模型性能与模型参数量、训练数据量、计算量三者之间存在可预测的幂律关系。更大的模型需要更多的数据，更大的计算量带来更好的性能——这直接推动了 GPT-4、Claude 等大模型的参数和数据规模竞赛。</span></div>
+      </div>
+      <div class="tech-item reveal">
+        <div class="tech-symbol">④</div>
+        <div class="tech-text"><strong>矩阵运算</strong><span>深度学习最核心的计算原语。全连接层 = 矩阵乘法（GEMM），卷积层 = 矩阵乘法（im2col 变换后），注意力 = 矩阵乘法（Q×K^T 再 × V）。GPU 的架构天然为矩阵运算优化——这也是为什么 NVIDIA 在 AI 时代成为了最重要的硬件公司。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INTERLUDE — Bridge
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="bridge">
+  <div class="interlude-header reveal">
+    <p class="interlude-eyebrow">续篇</p>
+    <h2 class="interlude-title">断桥重铸 · 六重法则</h2>
+    <p class="interlude-desc">当镜面深处出现断裂——信息缺失、信号中断、路径阻塞——AI 如何修补？不是泥瓦匠式的简单堆砌，而是六重维度的协同补全。每一重法则都对应着前六章修行中习得的一项核心能力，在此交汇共振，织成一张修复万象的因果之网。</p>
+  </div>
+
+  <div class="bridge-grid">
+    <div class="bridge-card reveal">
+      <div class="bridge-num">01</div>
+      <h4>跨岸凝视</h4>
+      <p>注意力机制建立全局关联。即使中间的桥面断裂，左岸的 Query 与右岸的 Key 仍能跨越断裂直接计算亲密分数——不是修复断裂本身，而是让断裂不再成为障碍。</p>
+    </div>
+    <div class="bridge-card reveal">
+      <div class="bridge-num">02</div>
+      <h4>记忆重塑</h4>
+      <p>预训练先验提供最可能的补全。AI 在亿万块神谕石中见过千万座桥的形态——完整的、断裂的、半毁的——当断裂出现，记忆如潮水般自动填补中间，因为概率最高的那个形状，它早已熟稔于心。</p>
+    </div>
+    <div class="bridge-card reveal">
+      <div class="bridge-num">03</div>
+      <h4>定向生长</h4>
+      <p>梯度下降引导空白参数自发优化。断裂处的空缺不是被填充的——在断口放置随机晶片作为种子，然后让微分之风一层一层地雕塑它们，直到形态与两端自然衔接，如同从未断裂过一般。</p>
+    </div>
+    <div class="bridge-card reveal">
+      <div class="bridge-num">04</div>
+      <h4>旁路保通</h4>
+      <p>残差连接维持信息流通。主桥断裂时，信号立刻通过跳跃连接绕过断层——残影之桥不需要主桥是完好的。梯度仍然能反向吹拂到断裂之前的每一层，让修复不是从头开始，而是从已学会的一切之上继续。</p>
+    </div>
+    <div class="bridge-card reveal">
+      <div class="bridge-num">05</div>
+      <h4>简约约束</h4>
+      <p>正则化迫使最平滑的补全。遗忘沙防止任何一块晶片过度自信，重量衰减约束每一次修补的幅度——不是修补得越多越好，而是用最小的力气达成最自然的融合。断口如同水面合拢，天衣无缝。</p>
+    </div>
+    <div class="bridge-card reveal">
+      <div class="bridge-num">06</div>
+      <h4>多头共识</h4>
+      <p>多组注意力之眼同时审视修复结果：结构头检查断口的几何连续性——两端是否对齐；语义头检查内容的合理性——补全的语义是否与上下文一致；风格头检查协调性——填充的形态是否融入了桥的原貌。三头共审，万无一失。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CODA — Quote
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="coda reveal" id="wisdom">
+  <p class="coda-text">镜子就在那里。它从不拒绝任何人，但它只向那些愿意同时穿越<em>数学</em>、<em>代码</em>和<em>耐心</em>三重迷雾的人，展露真正的光芒。</p>
+  <p class="coda-author">—— 阿提，镜之国贤者</p>
+</div>
+
+</div><!-- /content-wrap -->
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">万象镜</div>
+  <div class="footer-copy">以寓言抵达技术的深处 · 镜之国的修行永无止境</div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   Orbits Arrival — Ink Rings
+   ═══════════════════════════════════════════════════════════════ */
+(function() {
+  'use strict';
+  var TAU = Math.PI * 2;
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+  var W = 1, H = 1, DPR = 1;
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var PALETTE = {
+    top: '#121008', bg: '#070604', bg2: '#020201',
+    rgb: [232,217,160], mark: [250,244,220],
+    units: {
+      outer: { base: [232,176,88], spectrum: [[200,140,60],[232,176,88],[255,210,130],[255,235,180]] },
+      mid:   { base: [184,115,51], spectrum: [[150,90,40],[184,115,51],[210,150,90],[235,190,140]] },
+      inner: { base: [212,165,116], spectrum: [[180,130,80],[212,165,116],[235,200,160],[255,230,200]] }
+    }
+  };
+
+  function hash(n) { var x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+  function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
+  function lerp(a,b,t) { return a + (b-a) * t; }
+  function lerpRgb(a,b,t) { return [lerp(a[0],b[0],t), lerp(a[1],b[1],t), lerp(a[2],b[2],t)]; }
+  function spectrumAt(stops, t) {
+    if (!stops || !stops.length) return [200,200,200];
+    if (stops.length === 1) return stops[0].slice();
+    var x = clamp01(t) * (stops.length - 1);
+    var i = Math.floor(x), f = x - i;
+    if (i >= stops.length - 1) return stops[stops.length - 1].slice();
+    return lerpRgb(stops[i], stops[i+1], f);
+  }
+  function rgbToHsl(r,g,b) {
+    r/=255; g/=255; b/=255;
+    var max = Math.max(r,g,b), min = Math.min(r,g,b);
+    var h=0, s=0, l=(max+min)/2;
+    if (max !== min) {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        default: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+    return [h * 360, s, l];
+  }
+  function hue2rgb(p,q,t) {
+    if (t < 0) t += 1; if (t > 1) t -= 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+  }
+  function hslToRgb(h,s,l) {
+    h = ((h % 360) + 360) % 360 / 360;
+    var r,g,b;
+    if (s === 0) { r = g = b = l; }
+    else {
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+    return [r * 255, g * 255, b * 255];
+  }
+  function shiftHue(rgb, deg, satBoost, lightBoost) {
+    var hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+    return hslToRgb(hsl[0] + deg, clamp01(hsl[1] * (satBoost == null ? 1 : satBoost)), clamp01(hsl[2] + (lightBoost || 0)));
+  }
+  function inkRgba(rgb, a) {
+    return 'rgba(' + Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]) + ',' + a + ')';
+  }
+  function unitBase(u) { return u.base || u; }
+
+  function ringRgb(p, name, index, max) {
+    var u = p.units[name];
+    var t = max <= 1 ? 0.5 : index / Math.max(1, max - 1);
+    var wobble = (hash(index * 17.3 + name.length * 9.1) - 0.5) * 0.08;
+    return spectrumAt(u.spectrum, clamp01(t + wobble));
+  }
+  function makeRingInk(p, name, index, max) {
+    var base = ringRgb(p, name, index, max);
+    return function (a, angle) {
+      if (angle == null) return inkRgba(base, a);
+      var shimmer = Math.sin(angle * 3.2 + index * 0.7) * 22 + Math.cos(angle * 5.1 + index) * 12;
+      var lit = Math.sin(angle * 2 + index * 1.3) * 0.04;
+      return inkRgba(shiftHue(base, shimmer, 1.08, lit), a);
+    };
+  }
+  function makeRingMark(p, name, index, max) {
+    var base = ringRgb(p, name, index, max);
+    var mark = shiftHue(base, 18, 0.85, 0.18);
+    var pearl = lerpRgb(mark, p.mark, 0.45);
+    return function (a, angle) {
+      if (angle == null) return inkRgba(pearl, a);
+      var shimmer = Math.sin(angle * 4.1 + index) * 28;
+      return inkRgba(shiftHue(pearl, shimmer, 1.05, 0.06), a);
+    };
+  }
+
+  function ringSpec(unit, index, max) {
+    var seed = hash(unit * 97 + index * 13.7 + 0.31);
+    var seed2 = hash(unit * 41 + index * 19.3 + 2.17);
+    return {
+      unit: unit, index: index, seed: seed,
+      ecc: 0.92 + seed * 0.12,
+      wobble: (seed2 - 0.5) * 0.035,
+      spinRate: (0.04 + seed * 0.11) * (seed2 > 0.5 ? 1 : -1) * (1 + index / (max + 4)),
+      phase0: seed * TAU,
+      dashGap: 0.12 + seed * 0.35,
+      dashLen: 0.35 + seed2 * 0.55,
+      blotCount: 2 + Math.floor(seed * 5),
+      thickness: 0.55 + seed2 * 0.9
+    };
+  }
+
+  function bandRadii(band, count, u) {
+    var ranges = { outer: { inner: 0.34, outer: 0.46 }, mid: { inner: 0.20, outer: 0.325 }, inner: { inner: 0.075, outer: 0.185 } };
+    var r = ranges[band], out = [];
+    for (var i = 0; i < count; i++) {
+      var t = count === 1 ? 0.5 : i / (count - 1);
+      out.push((r.inner + (r.outer - r.inner) * t) * u);
+    }
+    return out;
+  }
+
+  function drawLogogramRing(c, cx, cy, radius, spec, color, mark, epoch) {
+    var spin = reducedMotion ? spec.phase0 : spec.phase0 + epoch * spec.spinRate;
+    var rx = radius, ry = radius * spec.ecc;
+    var blotSteps = reducedMotion ? 0 : spec.blotCount;
+    c.save();
+    c.translate(cx, cy);
+    c.rotate(spin);
+    c.rotate(spec.wobble);
+    c.beginPath();
+    c.ellipse(0, 0, rx, ry, 0, 0, TAU);
+    c.strokeStyle = color(0.14, 0);
+    c.lineWidth = Math.max(2.8, radius * 0.022);
+    c.stroke();
+    c.lineCap = 'round'; c.lineJoin = 'round';
+    var a = 0;
+    while (a < TAU - 0.02) {
+      var len = spec.dashLen * (0.7 + hash(spec.seed + a * 8) * 0.6);
+      var gap = spec.dashGap * (0.45 + hash(spec.seed + a * 11) * 0.75);
+      var a1 = Math.min(TAU, a + len);
+      var midA = (a + a1) * 0.5;
+      c.beginPath();
+      c.ellipse(0, 0, rx, ry, 0, a, a1);
+      c.strokeStyle = color(0.44 + hash(spec.seed + a) * 0.36, midA);
+      c.lineWidth = Math.max(1.1, radius * 0.0065 * spec.thickness);
+      c.stroke();
+      if (hash(spec.seed * 3 + a) > 0.55) {
+        var cos = Math.cos(midA), sin = Math.sin(midA);
+        var inward = 1 - (0.014 + hash(midA) * 0.024);
+        var outward = 1 + (0.01 + hash(midA + 1) * 0.022);
+        c.beginPath();
+        c.moveTo(cos * rx * inward, sin * ry * inward);
+        c.lineTo(cos * rx * outward, sin * ry * outward);
+        c.strokeStyle = color(0.68, midA);
+        c.lineWidth = Math.max(0.9, radius * 0.005);
+        c.stroke();
+      }
+      a = a1 + gap;
+    }
+    for (var b = 0; b < blotSteps; b++) {
+      var ba = (spec.phase0 + b / Math.max(1, blotSteps) * TAU + hash(spec.index + b) * 0.4) % TAU;
+      var bx = Math.cos(ba) * rx, by = Math.sin(ba) * ry;
+      var br = Math.max(1.1, radius * (0.008 + hash(spec.seed + b) * 0.014));
+      c.fillStyle = mark(0.5 + hash(b + spec.seed) * 0.35, ba);
+      c.beginPath(); c.arc(bx, by, br, 0, TAU); c.fill();
+      c.strokeStyle = color(0.72, ba); c.lineWidth = 0.9;
+      c.beginPath(); c.arc(bx, by, br * 1.4, 0.2, Math.PI * 1.4); c.stroke();
+    }
+    if (!reducedMotion) {
+      var lead = (epoch * spec.spinRate * 1.7 + spec.phase0) % TAU;
+      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead, lead + 0.7);
+      c.strokeStyle = color(0.9, lead + 0.35); c.lineWidth = Math.max(1.6, radius * 0.009); c.stroke();
+      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead + 0.15, lead + 0.45);
+      c.strokeStyle = mark(0.62, lead + 0.3); c.lineWidth = Math.max(0.8, radius * 0.004); c.stroke();
+      c.beginPath(); c.ellipse(0, 0, rx, ry, 0, lead - 0.55, lead);
+      c.strokeStyle = color(0.28, lead - 0.25); c.lineWidth = Math.max(1.0, radius * 0.005); c.stroke();
+    }
+    c.restore();
+  }
+
+  function drawNucleus(c, cx, cy, u, epoch) {
+    var p = PALETTE;
+    var outerInk = unitBase(p.units.outer);
+    var midInk = unitBase(p.units.mid);
+    var innerInk = unitBase(p.units.inner);
+    c.save();
+    var R = u * 0.055;
+    var field = c.createRadialGradient(cx, cy, 0, cx, cy, R * 2.8);
+    field.addColorStop(0, inkRgba(innerInk, reducedMotion ? 0.32 : 0.42));
+    field.addColorStop(0.35, inkRgba(midInk, 0.16));
+    field.addColorStop(0.7, inkRgba(outerInk, 0.08));
+    field.addColorStop(1, inkRgba(outerInk, 0));
+    c.fillStyle = field; c.beginPath(); c.arc(cx, cy, R * 2.8, 0, TAU); c.fill();
+    var spin = reducedMotion ? 0 : epoch * 0.15;
+    var cores = [outerInk, midInk, innerInk];
+    for (var i = 0; i < 3; i++) {
+      var rr = R * (0.35 + i * 0.28);
+      var tint = shiftHue(cores[i], reducedMotion ? 0 : epoch * (8 + i * 4), 1.1, 0.05);
+      c.save(); c.translate(cx, cy); c.rotate(spin * (i % 2 ? -1 : 1) + i);
+      c.beginPath(); c.ellipse(0, 0, rr, rr * 0.9, 0, 0.2, TAU - 0.4);
+      c.strokeStyle = inkRgba(tint, 0.5 + i * 0.16); c.lineWidth = 1.4 + i * 0.4; c.stroke();
+      c.restore();
+    }
+    c.fillStyle = inkRgba(p.mark, 0.95);
+    c.beginPath(); c.arc(cx, cy, Math.max(2, u * 0.008), 0, TAU); c.fill();
+    c.restore();
+  }
+
+  function drawSpectrumBand(c, cx, cy, inner, outer, spectrum, alpha) {
+    var mid = (inner + outer) * 0.5;
+    var width = Math.max(10, (outer - inner) * 0.95);
+    var stops = spectrum || [[180, 180, 180]];
+    c.beginPath(); c.arc(cx, cy, mid, 0, TAU);
+    if (typeof c.createConicGradient === 'function') {
+      var grad = c.createConicGradient(0, cx, cy);
+      var last = stops.length - 1;
+      for (var i = 0; i <= last; i++) grad.addColorStop(last === 0 ? 0 : i / last, inkRgba(stops[i], alpha));
+      if (last > 0) grad.addColorStop(1, inkRgba(stops[0], alpha));
+      c.strokeStyle = grad;
+    } else {
+      c.strokeStyle = inkRgba(stops[Math.floor(stops.length / 2)], alpha);
+    }
+    c.lineWidth = width; c.stroke();
+  }
+
+  function resize() {
+    var r = canvas.parentElement.getBoundingClientRect();
+    W = Math.max(1, Math.round(r.width));
+    H = Math.max(1, Math.round(r.height));
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  var OUTER_COUNT = 8, MID_COUNT = 12, INNER_COUNT = 6;
+  function draw(epoch) {
+    ctx.clearRect(0, 0, W, H);
+    var p = PALETTE, u = Math.min(W, H);
+    var cx = W / 2, cy = H / 2;
+    var outerU = unitBase(p.units.outer);
+    var midU = unitBase(p.units.mid);
+    var innerU = unitBase(p.units.inner);
+    var ground = ctx.createRadialGradient(cx, cy * 0.2, 0, cx, cy, Math.max(W, H) * 0.75);
+    ground.addColorStop(0, p.top); ground.addColorStop(0.55, p.bg); ground.addColorStop(1, p.bg2);
+    ctx.fillStyle = ground; ctx.fillRect(0, 0, W, H);
+    var glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, u * 0.52);
+    glow.addColorStop(0, inkRgba(innerU, reducedMotion ? 0.12 : 0.18));
+    glow.addColorStop(0.35, inkRgba(midU, 0.08));
+    glow.addColorStop(0.65, inkRgba(outerU, 0.05));
+    glow.addColorStop(1, inkRgba(outerU, 0));
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, u * 0.52, 0, TAU); ctx.fill();
+    drawSpectrumBand(ctx, cx, cy, u * 0.34, u * 0.46, p.units.outer.spectrum, 0.09);
+    drawSpectrumBand(ctx, cx, cy, u * 0.20, u * 0.325, p.units.mid.spectrum, 0.09);
+    drawSpectrumBand(ctx, cx, cy, u * 0.075, u * 0.185, p.units.inner.spectrum, 0.1);
+    var outerRadii = bandRadii('outer', OUTER_COUNT, u);
+    var midRadii = bandRadii('mid', MID_COUNT, u);
+    var innerRadii = bandRadii('inner', INNER_COUNT, u);
+    var i, spec, ink, mark;
+    for (i = 0; i < outerRadii.length; i++) {
+      spec = ringSpec(1, i, OUTER_COUNT); ink = makeRingInk(p, 'outer', i, OUTER_COUNT); mark = makeRingMark(p, 'outer', i, OUTER_COUNT);
+      drawLogogramRing(ctx, cx, cy, outerRadii[i], spec, ink, mark, epoch);
+    }
+    for (i = 0; i < midRadii.length; i++) {
+      spec = ringSpec(2, i, MID_COUNT); ink = makeRingInk(p, 'mid', i, MID_COUNT); mark = makeRingMark(p, 'mid', i, MID_COUNT);
+      drawLogogramRing(ctx, cx, cy, midRadii[i], spec, ink, mark, epoch);
+    }
+    for (i = 0; i < innerRadii.length; i++) {
+      spec = ringSpec(3, i, INNER_COUNT); ink = makeRingInk(p, 'inner', i, INNER_COUNT); mark = makeRingMark(p, 'inner', i, INNER_COUNT);
+      drawLogogramRing(ctx, cx, cy, innerRadii[i], spec, ink, mark, epoch);
+    }
+    drawNucleus(ctx, cx, cy, u, epoch);
+    ctx.lineWidth = 1.2; ctx.setLineDash([3, 7]);
+    [{frac:0.185,rgb:innerU},{frac:0.325,rgb:midU},{frac:0.46,rgb:outerU}].forEach(function(sep){
+      ctx.strokeStyle = inkRgba(sep.rgb, 0.28); ctx.beginPath(); ctx.arc(cx, cy, u * sep.frac, 0, TAU); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+
+  var raf = null, lastLoop = 0;
+  function loop(time) {
+    if (!reducedMotion || time - lastLoop >= 66) { lastLoop = time; draw(time / 1000); }
+    raf = requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', resize);
+  resize(); raf = requestAnimationFrame(loop);
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   UI Interactions
+   ═══════════════════════════════════════════════════════════════ */
+(function() {
+  var navbar = document.getElementById('navbar');
+  var hero = document.getElementById('hero');
+
+  function onScroll() {
+    var y = window.scrollY;
+    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    navbar.classList.toggle('on-dark', y < heroBottom - 100);
+
+    var sections = document.querySelectorAll('section[id], div[id]');
+    var links = document.querySelectorAll('.nav-link');
+    var current = '';
+    sections.forEach(function(sec) {
+      if (y >= sec.offsetTop - 200) current = sec.getAttribute('id');
+    });
+    links.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Intersection Observer — reveal on scroll */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+})();
+</script>
 </body>
 </html>
